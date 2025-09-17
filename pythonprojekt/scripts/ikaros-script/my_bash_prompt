@@ -1,0 +1,89 @@
+# prompt
+# Färger och format
+FMT_BOLD="\[\e[1m\]"
+FMT_DIM="\[\e[2m\]"
+FMT_RESET="\[\e[0m\]"
+FMT_UNBOLD="\[\e[22m\]"
+FMT_UNDIM="\[\e[22m\]"
+FG_BLACK="\[\e[30m\]"
+FG_BLUE="\[\e[34m\]"
+FG_CYAN="\[\e[36m\]"
+FG_GREEN="\[\e[32m\]"
+FG_GREY="\[\e[37m\]"
+FG_MAGENTA="\[\e[35m\]"
+FG_RED="\[\e[31m\]"
+FG_WHITE="\[\e[97m\]"
+FG_ORANGE="\[\e[34m\]"
+FG_YELLOW="\[\e[33m\]"
+FG_PURPLE="\[\e[35m\]"
+FG_LIGHT_GRAY="\[\e[37m\]"
+FG_DARK_GRAY="\[\e[90m\]"
+BG_YELLOW="\[\e[43m\]"
+BG_PURPLE="\[\e[45m\]"
+BG_LIGHT_GRAY="\[\e[47m\]"
+BG_ORANGE="\[\e[44m\]"
+BG_DARK_GRAY="\[\e[100m\]"
+BG_BLACK="\[\e[40m\]"
+BG_BLUE="\[\e[44m\]"
+BG_CYAN="\[\e[46m\]"
+BG_GREEN="\[\e[42m\]"
+BG_MAGENTA="\[\e[45m\]"
+BG_RED="\[\e[41m\]"
+
+# Git färg beroende på status
+parse_git_bg() {
+    [[ $(git status -s 2> /dev/null) ]] && echo -e "\e[43m" || echo -e "\e[42m"
+}
+
+parse_git_fg() {
+    [[ $(git status -s 2> /dev/null) ]] && echo -e "\e[33m" || echo -e "\e[32m"
+}
+
+# OpenShift-info med fallback
+openshift_info() {
+    if [ -f ~/.kube/config ]; then
+        current_context=$(awk '/current-context:/ {print $2}' ~/.kube/config | tr -d '\n' | sed 's/"//g')
+        if [ -n "$current_context" ]; then
+            CLUSTER=$(echo "$current_context" | cut -d'/' -f2 | cut -d':' -f1 | sed 's/api-//')
+            CONTEXT=$(echo "$current_context" | cut -d' ' -f1)
+            if [ -n "$CONTEXT" ]; then
+                WHITE='\033[1;37m'
+                BG_GREEN='\033[42m'
+                NC='\033[0m'
+                echo -e "${WHITE}${BG_GREEN}  [${CLUSTER#*}:${CONTEXT}]"
+            fi
+        fi
+    fi
+}
+
+# Klocka
+clock() {
+    date '+%H:%M:%S'
+}
+
+update_clock() {
+    clock=$(clock)
+}
+
+PROMPT_COMMAND='clock=$(date "+%H:%M:%S")'
+
+# Prompt
+PS1="\n${FG_RED}╭─"
+PS1+="${FG_BLUE}"
+PS1+="${FG_CYAN}${BG_BLUE}${FMT_BOLD}"
+PS1+=" \${clock} "
+PS1+="${FMT_BOLD}${BG_BLUE}${FG_WHITE}"
+PS1+=" \$(openshift_info)  "
+PS1+="${BG_LIGHT_GRAY}${FG_BLACK}${FMT_BOLD} \u@MY-PC "
+PS1+="${FG_BLACK}${BG_LIGHT_GRAY}"
+PS1+="${FG_BLACK}\w "
+PS1+="${FMT_RESET}${FG_LIGHT_GRAY}"
+PS1+="\$(git branch 2> /dev/null | grep '^*' | colrm 1 2 | xargs -I BRANCH echo -n \""
+PS1+="\$(parse_git_bg) "
+PS1+="${FG_BLACK} BRANCH "
+PS1+="${FMT_RESET}\$(parse_git_fg)\")\n"
+PS1+="${FG_RED}╰ "
+PS1+="${FG_GREEN}\\$  "
+PS1+="${FMT_RESET}"
+
+export PS1
