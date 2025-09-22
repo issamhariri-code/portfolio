@@ -16,7 +16,22 @@ def to_do_app():
                 else:
                     status = "[ ]"
                 print(status, f["Titel"], f["Kategori"])
-            input("Tryck Enter för att fortsätta...")
+            input("Tryck Enter för att komma tillbaka till menyn.")
+
+        elif val == 2:
+            lagg_till = input("Vad heter uppgiften?")
+            if not lagg_till:
+                print("Du har inte fyllt i en uppgift !")
+                input("Tryck Enter för att komma tillbaka till menyn.")
+                continue
+
+            fraga_kategori = input("Vilken kategori tillhör uppgiften ?")
+            if not fraga_kategori:
+                    print("Du har inte fyllt i en kategori !")
+                    input("Tryck Enter för att komma tillbaka till menyn. ")
+
+            print(f"Ny uppgift: {lagg_till} ({fraga_kategori})")
+            input("Tryck Enter för att komma tillbaka till menyn. ")
 
         elif val == 3:
             if not uppgifter:
@@ -40,10 +55,12 @@ def to_do_app():
                 else:
                     uppgifter[index]["klar"] = True
                     print("Markerad som klar!")
-            input("Tryck Enter för att fortsätta...")
+            input("Tryck Enter för att komma tillbaka till menyn.")
 
         elif val == 4:
             print("Vi ses nästa gång")
             break
 
+        print("Menyval:\n1. Visa alla uppgifter\n2. Lägg till ny uppgift\n3. Markera som klar\n4. Avsluta")
+        val = int(input("Välj ett alternativ: "))
 to_do_app()
