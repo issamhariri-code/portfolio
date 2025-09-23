@@ -29,7 +29,10 @@ def to_do_app():
             if not fraga_kategori:
                     print("Du har inte fyllt i en kategori !")
                     input("Tryck Enter för att komma tillbaka till menyn. ")
-
+            ny_uppgift = {"Titel": lagg_till,
+                          "Kategori": fraga_kategori,
+                          "klar": False}
+            uppgifter.append(ny_uppgift)
             print(f"Ny uppgift: {lagg_till} ({fraga_kategori})")
             input("Tryck Enter för att komma tillbaka till menyn. ")
 
@@ -61,6 +64,5 @@ def to_do_app():
             print("Vi ses nästa gång")
             break
 
-        print("Menyval:\n1. Visa alla uppgifter\n2. Lägg till ny uppgift\n3. Markera som klar\n4. Avsluta")
-        val = int(input("Välj ett alternativ: "))
+        
 to_do_app()
