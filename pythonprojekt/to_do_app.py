@@ -6,7 +6,7 @@ def to_do_app():
     ]
 
     while True:
-        print("Menyval:\n1. Visa alla uppgifter\n2. Lägg till ny uppgift\n3. Markera som klar\n4. Avsluta")
+        print("Menyval:\n1. Visa alla uppgifter\n2. Lägg till ny uppgift\n3. Markera som klar\n4. Avsluta\n5. Redigera/Ta bort uppgift.")
         val = int(input("Välj ett alternativ: "))
 
         if val == 1:
@@ -63,6 +63,22 @@ def to_do_app():
         elif val == 4:
             print("Vi ses nästa gång")
             break
+
+        elif val == 5:
+            if not uppgifter:
+                print("Inga uppgifter att redigera/ta bort.")
+                input("Tryck Enter för att komma tillbaka till menyn.")
+                continue
+            else:
+                i = 1
+                for f in uppgifter:
+                    if f["klar"]:
+                        status = "[X]"
+                    else:
+                        status = "[ ]"
+
+                    print(i, status, f["Titel"], f["Kategori"])
+                    i = i + 1
 
         
 to_do_app()
