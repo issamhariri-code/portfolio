@@ -32,6 +32,16 @@ def attack(pokemon_a, pokemon_b):
     damage = random.randint(1, pokemon_a["attack"])
     pokemon_b["hp"] -= damage
     return damage
+#Efter felsökning såg jag att HP(health points) inte nollställs efter varje strid
+#För att lösa detta behövde jag "klona" min dict innan stridsumuleringen så att 
+#HP nollställs och alla pokemon har fullt liv inför en ny strid.
+def klona_pokemon(pokemon_dict):
+    ny = {
+        "name": pokemon_dict["name"],
+        "attack": pokemon_dict["attack"],
+        "hp": pokemon_dict["hp"]
+    }
+    return ny
 
 # Funktion för att simulera en strid mellan två Pokémon
 def simulera_strid(pokemon_a, pokemon_b):
@@ -73,10 +83,13 @@ def spela_strid():
         print("Du kan inte välja samma Pokémon som motståndare!")
         motstandares_pokemon = val_av_pokemon(pokemon_list)
 
+    spelarens_kopia = klona_pokemon(spelarens_pokemon)
+    motstandares_kopia = klona_pokemon(motstandares_pokemon)
+
     print(f"\nDu valde {motstandares_pokemon['name']} som motståndare.\n")
 
     # Simulera striden
-    simulera_strid(spelarens_pokemon, motstandares_pokemon)
+    simulera_strid(spelarens_kopia, motstandares_kopia)
 
 # Funktion för att hantera hela spel-loopen
 # Ändra så att simuleringen inte startar förrän du anropat striden
