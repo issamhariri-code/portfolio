@@ -1,4 +1,6 @@
 import random
+import time
+
 
 # Lista på Pokémon med deras attack och hälsa
 pokemon_list = [
@@ -69,13 +71,17 @@ def simulera_strid(pokemon_a, pokemon_b):
 # Funktion som hanterar en individuell strid
 def spela_strid():
     print("Välkommen till Pokémon-striden!")
+    print("Välj din Pokemon: ")
     visa_pokemon(pokemon_list)
 
     # Spelaren väljer sin Pokémon
     spelarens_pokemon = val_av_pokemon(pokemon_list)
-    print(f"\nDu har valt {spelarens_pokemon['name']}!\n")
+    print()
+    print(f"\nDu har valt: {spelarens_pokemon['name']}!\n")
+    input("Tryck Enter för att välja motståndare !")
     
     # Spelaren väljer en motståndare
+    print()
     print("\nVälj en motståndare:")
     visa_pokemon(pokemon_list)
     motstandares_pokemon = val_av_pokemon(pokemon_list)
@@ -86,7 +92,23 @@ def spela_strid():
     spelarens_kopia = klona_pokemon(spelarens_pokemon)
     motstandares_kopia = klona_pokemon(motstandares_pokemon)
 
-    print(f"\nDu valde {motstandares_pokemon['name']} som motståndare.\n")
+    print()
+    print(spelarens_pokemon["name"], "vs", motstandares_pokemon["name"])
+    input("Tryck Enter för att starta striden !")
+
+    print()
+    print("===========================")
+    print("       STRID STARTAR       ")
+    print("===========================")
+    print()
+
+    for n in [3, 2, 1]:
+        print(n, flush=True)
+        time.sleep(1)
+    
+    print("GO !")
+    time.sleep(0.5)
+
 
     # Simulera striden
     simulera_strid(spelarens_kopia, motstandares_kopia)
@@ -99,6 +121,7 @@ def spel_loop():
     while True:
         try:
             spela_strid()
+            input("Tryck Enter för att fortsätta")
             spela_igen = input("\nVill du spela en strid till? (ja/nej): ").lower()
             if spela_igen != "ja":
                 print("Tack för att du spelade! Hej då!")
