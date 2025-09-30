@@ -10,40 +10,44 @@ pokemon4 = Pokemon("Charmander", 13, 55, 8)
 pokemon_list = [pokemon1, pokemon2, pokemon3, pokemon4]
 
 def starta_strid(pokemon_list):
-    val = int(input("Skriv ett tal mellan 1 - 4 för att välja Pokemon "))
+    lista_pokemon(pokemon_list)
+    val = int(input("Välj en siffra för att välja en Pokemon. "))
+    if val < 1 or val > len(pokemon_list):
+        print("Fel, pröva igen.")
+        return
     index = val - 1
 
-    random_pokemon = random.choice(pokemon_list)
-    copy_pokemon = Pokemon(random_pokemon.namn, 
-                        random_pokemon.attack, 
-                        random_pokemon.hp,
-                        random_pokemon.varians)
-    copy_pokemon.max_hp = random_pokemon.max_hp
+    enemy_pokemon = random.choice(pokemon_list)
+    copy_pokemon = Pokemon(enemy_pokemon.namn, 
+                        enemy_pokemon.attack, 
+                        enemy_pokemon.hp,
+                        enemy_pokemon.varians)
+    copy_pokemon.max_hp = enemy_pokemon.max_hp
 
     player_pokemon = pokemon_list[index]
     print(f"Du valde: {player_pokemon.namn}\n(Attack: {player_pokemon.attack}, Hälsa: {player_pokemon.hp} Varians: {Pokemon.varians})")
-    print(f"Motståndaren är: {random_pokemon}\n(Attack: {random_pokemon.attack}, Hälsa: {random_pokemon.hp}) Varians: {Pokemon.varians})")
+    print(f"Motståndaren är: {enemy_pokemon}\n(Attack: {enemy_pokemon.attack}, Hälsa: {enemy_pokemon.hp}) Varians: {Pokemon.varians})")
 
-    while (player_pokemon) and (random_pokemon):
+    while (player_pokemon) and (enemy_pokemon):
 
         """Användaren (spelaren som spelar)"""
         skada = player_pokemon.intervall()
-        random_pokemon.hp = random_pokemon.hp - skada
-        random_pokemon.klipp_hp()
-        print(f"{player_pokemon} slog {random_pokemon} för {skada}. HP kvar: {random_pokemon.hp}")
+        enemy_pokemon.hp = enemy_pokemon.hp - skada
+        enemy_pokemon.klipp_hp()
+        print(f"{player_pokemon} slog {enemy_pokemon} för {skada}. HP kvar: {enemy_pokemon.hp}")
 
-        if (random_pokemon.hp <= 0):
+        if (enemy_pokemon.hp <= 0):
             print(f"{player_pokemon} Vann striden!")
             break
 
         """ Motståndaren som spelar (datorn)"""
-        skada = random_pokemon.intervall()
+        skada = enemy_pokemon.intervall()
         player_pokemon.hp = player_pokemon.hp - skada
         player_pokemon.klipp_hp()
-        print(f"{random_pokemon} slog {player_pokemon} för {skada}. HP kvar: {player_pokemon.hp}")
+        print(f"{enemy_pokemon} slog {player_pokemon} för {skada}. HP kvar: {player_pokemon.hp}")
 
         if (player_pokemon.hp <= 0):
-            print(f"{random_pokemon} Vann striden!")
+            print(f"{enemy_pokemon} Vann striden!")
             break
 
 
@@ -56,7 +60,7 @@ def meny_loop():
         elif val == "2":
             lagg_till_pokemon(pokemon_list)
         elif val == "3":
-            print("Ta bort Pokemon")
+            ta_bort_pokemon(pokemon_list)
         elif val == "4":
             print("Starta en strid. ")
         elif val == "5":
@@ -86,12 +90,21 @@ def lagg_till_pokemon(pokemon_list: list[Pokemon]) -> None:
     print(f"{ny_pokemon.namn} (ATK {ny_pokemon.attack}, HP {ny_pokemon.hp}, VAR {ny_pokemon.varians}) lades till!")
 
 def ta_bort_pokemon(pokemon_list: list[Pokemon]) -> None:
-    lista_pokemon(pokemon_list)
-    if lista_pokemon is not True:
-        print("Inga Pokemon att ta bort")
+    if not pokemon_list:
+        print("Det finns ingen Pokemon att ta bort. ")
         return
 
+    lista_pokemon(pokemon_list)
+    svar = input("Skriv numret på en Pokemon att ta bort: ")
+    val = int(svar)
 
+    if val < 1 or val > len(pokemon_list):
+        print("Det numret finns inte.")
+        return
+    
+    index = val - 1
+    borttagen = pokemon_list.pop(index)
+    print(f"Tog bort följande Pokemon: {borttagen.namn}")
 
 
 if __name__ == "__main__":
