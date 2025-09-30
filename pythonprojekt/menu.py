@@ -9,3 +9,8 @@ def print_menu():
     print("5) Spara resultat (JSON) ")
     print("6) Läs resultat (JSON) ")
     print("0) Avsluta. ")
+
+def get_choice() -> str:
+    meny_val = input("Välj ett av alternativen nedan. ")
+    meny_val = meny_val.strip()
+    return meny_val
