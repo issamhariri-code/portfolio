@@ -27,7 +27,12 @@ class Pokemon:
     def klipp_hp(self) -> int:
         if self.hp < 0:
             self.hp = 0
-
+##Detta är en koll för att se att HP nollställs efter varje strid.
     def is_alive (self) -> bool:
         """Returnerar True om HP är större än 0"""
         return self.hp > 0
+
+    def copy_pokemon(self) -> "Pokemon":
+        ny = Pokemon(self.namn, self.attack, self.hp, self.varians)
+        ny.max_hp = self.max_hp
+        return ny
