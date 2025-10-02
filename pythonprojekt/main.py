@@ -78,6 +78,28 @@ def spara_resultat(results: list[dict]) -> None:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"Sparade {len(results)} strider till {file_path}")
 
+def visa_statistik(results):
+    if not results:
+        print("Ingen statistik att visa, spela en strid.")
+        return
+    vinster = {}
+
+    for match in results:
+        vinnare = match.get("Vinnare") or match.get("vinnare")
+        if not vinnare:
+            continue
+        if vinnare in vinster:
+            vinster[vinnare] += 1
+        else:
+            vinster[vinnare] = 1
+
+    print("--STATISTIK--")
+    print("Totalt antal matcher:", len(results))
+        
+    print("Antal vinster per Pokemon:")
+    for namn, antal in vinster.items():
+        print(f"{namn}: {antal}")
+
 
 def meny_loop():
     while True:
@@ -85,6 +107,9 @@ def meny_loop():
         val = get_choice()
         if val == "1":
             lista_pokemon(pokemon_list)
+            #La till en paus (input)eftersom, menyn loopades efter val 1 vilket gör att
+            #man måste förstora terminalen för att se listan av pokemon
+            input("Tryck Enter för att komma tillbaka till Menyn")
         elif val == "2":
             lagg_till_pokemon(pokemon_list)
         elif val == "3":
@@ -94,7 +119,7 @@ def meny_loop():
         elif val == "5":
             spara_resultat(results)
         elif val == "6":
-            print("Visa statistik (JSON)")
+            visa_statistik(results)
         elif val == "0":
             print("Avslutar programmet")
             break
