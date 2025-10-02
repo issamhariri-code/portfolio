@@ -41,6 +41,10 @@ def starta_strid(pokemon_list):
             print(f"{player_pokemon.namn} slog {enemy_pokemon.namn} för {slumpa_skada} HP kvar: {enemy_pokemon.hp}/{enemy_pokemon.max_hp}")
             if enemy_pokemon.hp == 0:
                 print(f"{player_pokemon.namn} Vann striden !")
+                result = {"Vinnare": player_pokemon.namn,
+                          "Förlorare": enemy_pokemon.namn,
+                          "tid": datetime.now() .isoformat(timespec="seconds")}
+                results.append(result)
                 break
             #motståndarens tur
             slumpa_skada = enemy_pokemon.intervall()
@@ -49,6 +53,10 @@ def starta_strid(pokemon_list):
             print(f"{enemy_pokemon.namn} slog {player_pokemon.namn} för {slumpa_skada} HP kvar: {player_pokemon.hp}/{player_pokemon.max_hp}")
             if player_pokemon.hp == 0:
                 print(f"{enemy_pokemon.namn} Vann striden !")
+                result = {"Vinnare": enemy_pokemon.namn,
+                          "Förlorare": player_pokemon.namn,
+                          "tid": datetime.now().isoformat(timespec="seconds")}
+                results.append(result)
                 break
 
         # Striden är slut här (någon vann). Fråga om användaren vill spela igen.
@@ -58,6 +66,18 @@ def starta_strid(pokemon_list):
             continue
         else:
             return
+        
+def spara_resultat(results: list[dict]) -> None:
+    # bestämmer sökväg mappen data och filnamnet matches.json
+    data_dir = Path(__file__).parent / "data"
+    # Kollar att mappen data existerar 
+    data_dir.mkdir(parents=True, exist_ok=True)
+    file_path = data_dir / "matches.json"
+    with file_path.open('w', encoding='utf-8') as f:
+        # skriver ned listan i json format
+        json.dump(results, f, ensure_ascii=False, indent=2)
+    print(f"Sparade {len(results)} strider till {file_path}")
+
 
 def meny_loop():
     while True:
@@ -72,7 +92,7 @@ def meny_loop():
         elif val == "4":
             starta_strid(pokemon_list)
         elif val == "5":
-            print("Spara resultat (JSON)")
+            spara_resultat(results)
         elif val == "6":
             print("Visa statistik (JSON)")
         elif val == "0":
