@@ -12,15 +12,32 @@ class Pokemon:
 #Representerar en Pokemon med namn, attack och hälsa
     def __str__(self) -> str:
         return f"{self.namn}"
-#Skapar funktion så att en pokemon gör skada mellan ett visst intervall för mer användarvänlighet.  
+
+#                 FÖRKLARING TILL INTERVALL FUNKTION !
+# Om attack är > 10 så blir attack ett slumpat tal mellan (attack - varians) och attack
+# annars: Alltså om attack nivån på Pokemon inte är högre än 10 så blir 
+# skadan ett slumpat tal mellan (attack - varians) (attack + varians)
+# Alltså det är helt som vanligt, t.ex har du 8 i attack och varians på 4 kan du slå
+# lägst 4 och högst 12. 
     def intervall(self) -> int:
-        lägsta = self.attack - self.varians
-        if lägsta < 1:
-            lägsta = 1
+        if self.attack > 10:
+            low = self.attack - self.varians
+            if low < 1:
+                low = 1
+            high = self.attack
+            return random.randint(low, high -1)
+        else:
+            low = self.attack - self.varians
+            if low < 1:
+                low = 1
+            high = self.attack + self.varians
+        return random.randint(low, high)
+        
+            
 #Slumpar slag mellan högsta och lägsta intervallet, den variabeln kallar vi för varians.
-        högsta = self.attack + self.varians
-        slumpa = random.randint(lägsta, högsta)
-        return slumpa
+        #högsta = self.attack + self.varians
+        #slumpa = random.randint(lägsta, högsta)
+        #return slumpa
 
 #Funktion för att undvika att hälsan kan få en negativ siffra vilket jag stötte på flera gånger
 #Här säger vi istället att om hälsan(hp) är mindre än 0 så är hp 0.
