@@ -17,7 +17,10 @@ pokemon_list = [pokemon1, pokemon2, pokemon3, pokemon4]
 def starta_strid(pokemon_list):
     while True:
         lista_pokemon(pokemon_list)
-        val = int(input("Välj en siffra för att välja en Pokemon. "))
+        try:
+            val = int(input("Välj en siffra för att välja en Pokemon. "))
+        except ValueError:
+            print("Fel! Du måste skriva en siffra")
         if val < 1 or val > len(pokemon_list):
             print("Fel, pröva igen.")
             return
@@ -38,7 +41,7 @@ def starta_strid(pokemon_list):
             slumpa_skada = player_pokemon.intervall()
             enemy_pokemon.hp -= slumpa_skada
             enemy_pokemon.klipp_hp()
-            print(f"{player_pokemon.namn} slog {enemy_pokemon.namn} för {slumpa_skada} HP kvar: {enemy_pokemon.hp}/{enemy_pokemon.max_hp}")
+            print(f"{player_pokemon.namn} slog {enemy_pokemon.namn} med {slumpa_skada} damage points. Hälsa: {enemy_pokemon.hp}/{enemy_pokemon.max_hp}")
             if enemy_pokemon.hp == 0:
                 print(f"{player_pokemon.namn} Vann striden !")
                 result = {"Vinnare": player_pokemon.namn,
@@ -50,7 +53,7 @@ def starta_strid(pokemon_list):
             slumpa_skada = enemy_pokemon.intervall()
             player_pokemon.hp -= slumpa_skada
             player_pokemon.klipp_hp()
-            print(f"{enemy_pokemon.namn} slog {player_pokemon.namn} för {slumpa_skada} HP kvar: {player_pokemon.hp}/{player_pokemon.max_hp}")
+            print(f"{enemy_pokemon.namn} slog {player_pokemon.namn} med {slumpa_skada} damage points. Hälsa: {player_pokemon.hp}/{player_pokemon.max_hp}")
             if player_pokemon.hp == 0:
                 print(f"{enemy_pokemon.namn} Vann striden !")
                 result = {"Vinnare": enemy_pokemon.namn,
@@ -107,9 +110,9 @@ def meny_loop():
         val = get_choice()
         if val == "1":
             lista_pokemon(pokemon_list)
-            #La till en paus (input)eftersom, menyn loopades efter val 1 vilket gör att
-            #man måste förstora terminalen för att se listan av pokemon
-            input("Tryck Enter för att komma tillbaka till Menyn")
+            #La till en paus efter felsökning, menyn loopades efter val 1,5,6 
+            # vilket gör att man måste förstora terminalen för att se output.
+            input("Tryck (Enter) för att komma tillbaka till Menyn") #paus input
         elif val == "2":
             lagg_till_pokemon(pokemon_list)
         elif val == "3":
@@ -118,10 +121,12 @@ def meny_loop():
             starta_strid(pokemon_list)
         elif val == "5":
             spara_resultat(results)
+            input("Tryck (Enter) för att komma tillbaka till Menyn") #paus input
         elif val == "6":
             visa_statistik(results)
+            input("Tryck (Enter) för att komma tillbaka till Menyn") #paus input
         elif val == "0":
-            print("Avslutar programmet")
+            print("Programmet avslutades..")
             break
 
 def lista_pokemon(pokemon_list):
@@ -129,17 +134,19 @@ def lista_pokemon(pokemon_list):
         print(f"{index}. {p.namn} (ATK {p.attack}, HP {p.hp}/{p.max_hp}, VAR {p.varians})")
 
 def lagg_till_pokemon(pokemon_list: list[Pokemon]) -> None:
-    svar = input("Välj ett namn på din Pokemon. ")
-    namn = svar
-    svar = input("Välj attack t.ex 8. Välj ett tal mellan: (0 - 13)")
-    attack = int(svar)
-    svar = input("Välj HP (Hälsa) t.ex 60. Välj ett tal mellan (50-80)")
-    hp = int(svar)
-    svar = input("Välj Varians, ju högre attack desto högre varians väljer du,\nju lägre attack desto lägre varians.")
-    varians = int(svar)
-
-    ny_pokemon = Pokemon(namn, attack, hp, varians)
-    pokemon_list.append(ny_pokemon)
+    try:
+        svar = input("Välj ett namn på din Pokemon. ")
+        namn = svar
+        svar = input("Välj attack t.ex 8. Välj ett tal mellan: (0 - 13)")
+        attack = int(svar)
+        svar = input("Välj HP (Hälsa) t.ex 60. Välj ett tal mellan (50-80)")
+        hp = int(svar)
+        svar = input("Välj Varians, ju högre attack desto högre varians väljer du,\nju lägre attack desto lägre varians.")
+        varians = int(svar)
+        ny_pokemon = Pokemon(namn, attack, hp, varians)
+        pokemon_list.append(ny_pokemon)
+    except ValueError:
+        print("Fel: attack, hp och varians måste vara siffror!")
     print(f"{ny_pokemon.namn} (ATK {ny_pokemon.attack}, HP {ny_pokemon.hp}, VAR {ny_pokemon.varians}) lades till!")
 
 def ta_bort_pokemon(pokemon_list: list[Pokemon]) -> None:
@@ -149,15 +156,19 @@ def ta_bort_pokemon(pokemon_list: list[Pokemon]) -> None:
 
     lista_pokemon(pokemon_list)
     svar = input("Skriv numret på en Pokemon att ta bort: ")
-    val = int(svar)
+    try:
+        val = int(svar)
 
-    if val < 1 or val > len(pokemon_list):
-        print("Det numret finns inte.")
-        return
-    
-    index = val - 1
-    borttagen = pokemon_list.pop(index)
-    print(f"Tog bort följande Pokemon: {borttagen.namn}")
+        if val < 1 or val > len(pokemon_list):
+            print("Det numret finns inte.")
+            return
+        index = val - 1
+        borttagen = pokemon_list.pop(index)
+        print(f"Tog bort följande Pokemon: {borttagen.namn}")
+    except ValueError:
+        print("Fel, du måste skriva en siffra !")
+    except IndexError:
+        print("Ogiltigt nummer, ingen Pokemon där.")
 
 
 if __name__ == "__main__":
