@@ -80,12 +80,12 @@ def lagg_till_pokemon(pokemon_list: list[Pokemon]) -> None:
     except ValueError:
         print("Fel: attack, hp och varians måste vara siffror!")
 
-
+#Funktion för att ta bort pokemon om ej pokemon finns så printas detta ut
 def ta_bort_pokemon(pokemon_list: list[Pokemon]) -> None:
     if not pokemon_list:
         print("Det finns ingen Pokemon att ta bort. ")
         return
-
+#Lagt till try/except fel ifall det är index fel eller syntax fel (int)
     lista_pokemon(pokemon_list)
     svar = input("Skriv numret på en Pokemon att ta bort: ")
     try:
@@ -114,13 +114,13 @@ def spara_resultat(results: list[dict]) -> None:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"Sparade {len(results)} strider till {file_path}")
 
-
+#Funktion för att visa statistik menyval 6
 def visa_statistik(results):
     if not results:
         print("Ingen statistik att visa, spela en strid.")
         return
     vinster = {}
-
+#Om de ej finns statistik att visas så körs först denna 
     for match in results:
         vinnare = match.get("Vinnare") or match.get("vinnare")
         if not vinnare:
@@ -129,7 +129,7 @@ def visa_statistik(results):
             vinster[vinnare] += 1
         else:
             vinster[vinnare] = 1
-
+#Loop för att registrera vinnar resultat
     print("--STATISTIK--")
     print("Totalt antal matcher:", len(results))
         
@@ -137,7 +137,7 @@ def visa_statistik(results):
     for namn, antal in vinster.items():
         print(f"{namn}: {antal}")
         
-
+#Här påbörjas stridsloopen även lagt till ValueError för att säkerställa att de int
 def starta_strid(pokemon_list, results: list[dict]):
     while True:
         lista_pokemon(pokemon_list)
@@ -201,4 +201,3 @@ def starta_strid(pokemon_list, results: list[dict]):
             continue
         else:
             return
-# ...existing code...
