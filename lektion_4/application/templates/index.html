@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}index{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text center">index</h1>
+            <form class ="mt-4" action="{{url_for('api_post')}}"method='get'>
+                <div class = "mb-3">
+                    <label for="year" class ="form-label">Year</label>
+                    <input type="text" id="year" name="year" class="form-control" placeholder="2025" required>
+                    </div>
+                <div class = "mb-3">
+                    <label for="countrycode" class="form-label">Country code</label>
+                    <input type="text" id="countrycode" name="countrycode" class="form-control" placeholder="SE" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% if title %}
+        <h3 class="mt-5">{{ title }}</h3>
+      {% endif %}
+
+      {% if data %}
+        <div class="mt-3">
+          {{ data|safe }}
+        </div>
+      {% endif %}
+            <a"btn btn-primary mt-5 mb-5" href="form"role="button"<Enter Data></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
