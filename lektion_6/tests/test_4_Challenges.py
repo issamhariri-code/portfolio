@@ -21,6 +21,8 @@ def test_Has_endpoint_log():
         request.urlopen("http://127.0.0.1:5000/api", context=context, timeout=10)
 
 
+# Non-Python content (JSON, Jinja and instructions) wrapped in a string so pytest can import this module.
+_EXTRAS = """
 [
   {
     "countryCode": "AD",
@@ -53,6 +55,8 @@ def test_Has_endpoint_log():
 # 3. Skicka countries till templaten med render_template, och lägg till alternativen i <select> med en jinja for-loop.
 #    Jinja docs: https://jinja.palletsprojects.com/en/3.1.x/templates/#for
 #    Ex: <option value="se">Sweden</option>
+"""
+
 
 def test_Form_has_select():
     with request.urlopen("http://127.0.0.1:5000/form", context=context, timeout=10) as response:
@@ -123,4 +127,3 @@ def test_catch_404():
 # 1. Fånga upp 405 från när man skickar data till /api med GET (URL i browsern). Tips ändringen sker i app.py 
 # 2. Skicka vidare till /index 
 # 3. Skicka med ett meddelande till {{message}} i render_template
-
