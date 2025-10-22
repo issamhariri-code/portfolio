@@ -11,7 +11,15 @@
                     <input type="text" id="year" name="year"><br/>
                     <label for="ccode">Country code:</label><br/>
                     <input type="text" id="ccode" name="countrycode"><br/>
-                    <!-- Lägg till fält här -->
+                    <select id="ccode" name="countrycode" class="form-select">
+                        {% if countries %}
+                            {% for c in countries %}
+                                <option value="{{c.countryCode}}">{{c.name}}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option value="SE">Sweden</option>
+                        {% endif %}
+                    </select></br>
                     <button type="submit" class="btn btn-primary mt-5">Submit</button>
                 </form>
             </div>    

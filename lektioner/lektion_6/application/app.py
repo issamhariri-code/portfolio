@@ -9,14 +9,16 @@
 
 from markupsafe import escape
 from application import func
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 # Skapa ett Flask server-objekt. Det är denna som ni sedan startar med 'flask run' från terminalen.
 app = Flask(__name__) 
 
 
-@app.route("/") 
+@app.route("/", methods=["GET"]) 
 def index():
+    countries = [{'countryCode': 'SE', 'name': 'Sweden'}]
+    return render_template('form.html', headline= 'Fyll i formuläret', countries=countries)
     '''Denna funktion körs när man går till servern utan endpoint. 
        På en statisk webbsida skulle detta t.ex motsvara filen index.html'''
 
@@ -34,6 +36,10 @@ def form():
     ##### Plats för er kod #####
 
     return render_template('form.html')
+
+@app.errorhandler(404)
+def handle_404(e):
+    return render_template('index.html', message= "Sidan kunde inte hittas", headline= "Welcome"), 404
 
 
 @app.route("/api", methods=["POST"]) 

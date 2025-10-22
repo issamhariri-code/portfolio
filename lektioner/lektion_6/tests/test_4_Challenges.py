@@ -12,7 +12,7 @@ context = ssl._create_unverified_context()
 def test_Has_endpoint_log():
     """
     GIVEN server is running
-    WHEN a user tries to access log
+      cp -v /home/issam/git/flask_api/lektion_6/tests/test_4_Challenges.py /home/issam/git/flask_api/lektion_6/backup/test_4_copy.py  WHEN a user tries to access log
     THEN the server responds
     """
     context = ssl._create_unverified_context()
