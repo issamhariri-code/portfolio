@@ -1,7 +1,9 @@
 #Denna fil ska testa inmatningsvalidering samt datumregler
 #Exempeltester som ska finnas:
-"""Datum innan 2022-11-01 ska underkännas,
-   Datum två dagar framåt ska underkännas,
-   Datum 2022-11-01 ska godkännas,
- Ogiltiga datum som exempelvis: 31/02 ska underkännas"""
+"""# Test: datum efter i dag -> ogiltigt
+# Test: datum innan 2022-11-01 -> ogiltigt
+# Test: minst en ticker krävs
+# Test: flera tickers funkar
+# Test: ogiltig ticker (tom/blank) -> fel
+"""
 
