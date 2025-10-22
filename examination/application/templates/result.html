@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-
+{# Använde HTML kommentar i koden så att användaren kan se det på webbläsarens
+källa, detta är en jinja kommentar som försvinner #}
 <section>
     <h1>Result</h1>
 
@@ -11,10 +12,10 @@
     <div class="Messages">
 
     </div>
-
-    <table>
+    <!--Tabell resultatet, där all data för den tickern som användaren har valt.-->
+    <table> <!--All tabelinnehåll ligger inuti table som startar själva tabellen.-->
         <thead>
-            <tr>
+            <tr> <!--Table row, en rad i tabellen-->
                 <th>Ticker</th>
                 <th>Name</th>
                 <th>Opening price</th>
@@ -33,6 +34,6 @@
 
     </div>
 
-    <a href="Tillbaka till sökrutan"></a>
+    <a href="Tillbaka till sökrutan"></a> <!--Länk tillbaka till annan endpoint-->
 
 {% endblock %}
