@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Resultat{% endblock %}
+{% block content %}
+<h2>Elpriser för vald dag</h2>
+<table border="1">
+  <tr>
+    <th>Tid</th>
+    <th>Pris (SEK/kWh)</th>
+  </tr>
+  {% for row in data %}
+  <tr>
+    <td>{{ row.time_start[11:16] }}</td>
+    <td>{{ "%.2f"|format(row.SEK_per_kWh) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

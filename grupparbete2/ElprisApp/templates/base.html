@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ElprisApp{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <div id="map" style="height: 400px;"></div>
+    <script>
+        var map = L.map("map").setView([59.333198263167716, 18.04769366144777], 13);
+       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+        L.marker([59.3293, 18.0686]).addTo(map)
+            .bindPopup("Hej")
+            .openPopup();
+    </script>
+    
+<header>
+    <h1>ElprisApp ⚡</h1>
+    <hr>
+    <nav>
+        <a href="{{ url_for('index') }}">Start</a> |
+        <a href="{{ url_for('index') }}">Jämför</a>
+    </nav>
+</header>
+<main>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash">
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>
+
