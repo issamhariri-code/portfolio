@@ -24,22 +24,22 @@ def test_get_elpriser_returns_list():
     """
     data = get_elpriser(2025, 10, 26, "SE3")
 
-    assert isinstance(data, list) 
+    assert type(data) == list 
     #Funktionen ska returnera en lista
 
 def test_get_elpriser_item_structure():
-    """
-    Om listan inte är tom ska varje rad vara en dict med nycklarna:
-    time_start och SEK_per_kWh
-    """
     data = get_elpriser(2025, 10, 26, "SE3")
 
-    if len(data) > 0: #kollar om listan data innehåller minst ett element
-        first = data[0] #hämtar data från index [0] och sparar i variabeln
-        assert isinstance(first, dict) #kontrollerar att första element är en dict 
-#om inte misslyckas test med ett meddelande om att varje rad ska vara en dict
-        assert "time_start" in first #Nyckeln 'time_start' saknas
-        assert "SEK_per_kWh" in first #Nyckeln 'SEK_per_kWh' saknas
+    # Om listan inte är tom
+    if len(data) > 0:
+        first = data[0]
+
+        # Kontrollera att första elementet är en dict
+        assert type(first) == dict
+
+        # Kontrollera att nycklarna finns
+        assert "time_start" in first
+        assert "SEK_per_kWh" in first
 
 
 
