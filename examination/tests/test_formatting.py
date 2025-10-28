@@ -1,5 +1,16 @@
-#Denna fil ska testa formatteringsfunktioner
-#Tester som exempel:
-"""Tiden 0 ska bli 00:00,
-   Tiden 5 ska bli 05:00,
-  Tiden 14 ska bli 14:00"""
+"""
+tester i pris (exempel):
+int 123 ger float 123.00
+123.4 output: 123.40
+123.456 output: 123.46
+None = "-" 
+
+tester procent:
+1.234 ger output: 1.23 %
+-0.8 ger output: -0.80%
+0 ger 0.00 %
+None = "-"
+
+stora och små tal ska hanteras utan kracsh
+inga blanksteg eller feltecken
+"""
