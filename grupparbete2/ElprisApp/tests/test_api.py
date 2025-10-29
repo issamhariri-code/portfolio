@@ -8,7 +8,7 @@ testa att datan om den finns, har rätt struktur.
 
 """
 
-from utils.api_handler import get_elpriser
+from ElprisApp.utils.api_handler import get_elpriser
 
 def test_get_elpriser_returns_data():
     """

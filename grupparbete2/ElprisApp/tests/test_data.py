@@ -10,7 +10,7 @@ testa att felaktig input hanteras
 
 import pytest
 import pandas as pd
-from utils.data_tools import create_dataframe
+from ElprisApp.utils.data_tools import create_dataframe
 
 def test_create_dataframe():
     sample = [{"time_start":"00:00","SEK_per_kWh":0.5}]
