@@ -21,19 +21,21 @@
 }).addTo(map);
 
         L.marker([59.3293, 18.0686]).addTo(map)
-            .bindPopup("Hej")
+            .bindPopup("SE3 Stockholm")
+            .openPopup();
+
+        L.marker([65.5851537500001, 22.156278866422507]).addTo(map)
+            .bindPopup("SE1 Luleå")
+            .openPopup();
+
+        L.marker([62.389001290108446, 17.306942002803556]).addTo(map)
+            .bindPopup("SE2 Sundsvall")
+            .openPopup();
+
+        L.marker([55.602267689379794, 13.002227089341252]).addTo(map)
+            .bindPopup("SE4 Malmö")
             .openPopup();
     </script>
-    
-<header>
-    <h1>ElprisApp ⚡</h1>
-    <hr>
-    <nav>
-        <a href="{{ url_for('index') }}">Start</a> |
-        <a href="{{ url_for('index') }}">Jämför</a>
-    </nav>
-</header>
-<main>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class="flash">
@@ -44,7 +46,7 @@
         {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}
-</main>
+        
 </body>
 </html>
 
