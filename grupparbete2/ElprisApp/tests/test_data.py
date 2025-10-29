@@ -31,7 +31,7 @@ def test_create_dataframe_handles_empty_list():
     # tom lista blir 0 rader 
     assert len(df) == 0
 
-    # Kolumnerna måste finnas
+    # Kolumnerna måste finnas i tabellen 
     assert "time_start" in df.columns
     assert "SEK_per_kWh" in df.columns
 
@@ -44,7 +44,12 @@ def test_create_dataframe_invalid_input():
 
     try:
         create_dataframe(None)
-        assert False, "Funktionen skulle kasta fel vid felaktig input"
+        assert False #om funktionen inte hittar fel, fortsätter koden
+        #assert False på rad 47 gör att testet misslyckas med felmeddelande.
     except:
         # Om vi hamnar här fungerar testet
+        # då har funktionen hanterat felaktig input korrekt
         assert True
+
+        """testet verifierarar att funktionen create_dataframe
+          kastar ett undantag när den får None som input  """
