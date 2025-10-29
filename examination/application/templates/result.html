@@ -2,6 +2,16 @@
 {% block content %}
 {# Använde HTML kommentar i koden så att användaren kan se det på webbläsarens
 källa, detta är en jinja kommentar som försvinner #}
+<!--kontext för result.html
+i yaml form :D
+summary: {
+date: str
+perspective_label: str exempelvis, pris högst > lägst 
+count: antal rader
+messages: är varningar från api_client
+data: lista av poster som ticker,name,open,close,high,low,pct_change
+empty: True (bool) om data är helt tom som jag tidigare nämnt ska inte index kracsha för en
+felaktig input eller tom data, index.html renderas även om en ticker kraschar.}-->
 <section>
     <h1>Result</h1>
 
