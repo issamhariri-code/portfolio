@@ -16,4 +16,11 @@ färdiga strängar för UI, exempelvis:
 # lägg till % i slutet
 # visa − tecken vid behov
 
-
+#mapping av perspektiv , visas i result.html
+#variabler
+#price_asc = pris stigande
+#price_desc = pris fallande
+#pct_asc = förändring i procent stigande
+#pct_desc = förändring i procent fallande
+#top_gainers = top 3 vinnare
+#top_loosers = topp 3 förlorare
