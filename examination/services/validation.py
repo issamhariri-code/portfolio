@@ -27,7 +27,8 @@ import datetime
 # tickers: minst 1, max 10, korrekta tecken
 # tomma poster tas bort, versaler normaliseras
 
-# Här lägger vi funktionerna senare (validate_input)
+# rådatahantering här finslipar vi arbetat, trimmar,splittar på inputs, filterar bort tomma inputs
+# kollar max antal tickers och sparar i rätt lista, hanterar datumfel.
 
 #minsta tillåtna datum
 min_date = datetime.date(2022, 11, 1)
@@ -57,4 +58,26 @@ def validate_input(tickers_input, date_input):
     except ValueError:
         errors.append("Ogiltig datumformat. Använd YY-MM-DD")
         return result
-
+    if tickers_input is None or "":
+        errors.append("Ange minst en ticker eller företagsnamn")
+        return result
+    items = tickers_input.split(",") #tar  bort kommatecken
+    cleaned_items = []
+    for item in items:
+        trimmed_item = item.strip() #trimmar bort whitespace
+    cleaned_items.items.append(trimmed_item)  #lägger in det trimmade i listan
+    final_items = [] #skapar ny lista
+    for i in cleaned_items: #loopar igenom cleaned_items som inte är tom
+        if i != "":  # städar upp tomma strängar
+           final_items.append(i)  #appendar in i listan final_items
+    if final_items == []: #om listan är tom
+        errors.append("Ange minst en ticker eller företagsnamn") #felmeddelande
+        return result
+    if len(final_items) > max_items: #om användaren skriver in fler än vad max_items tillåter som är 10
+        errors.append("Max 10 tickers är tillåtna") #felmeddelande
+        return result
+    clean["raw_items"] = final_items
+    new_list = []
+    for item in clean["raw_items"]:
+        upper_item = item.upper() #checkar stora versaler
+        new_list.append(upper_item) #sparar det i listan new_list
