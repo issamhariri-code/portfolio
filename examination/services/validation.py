@@ -35,14 +35,14 @@ min_date = datetime.date(2022, 11, 1)
 #max antal ticker per sökning
 max_items = 10
 
-def validate_input(tickers_input, date_input):
+def validate_input(tickers_input, date_input): #säker och tydlig rensning av indata
     errors = []
-    clean = {"date": None, "raw_items": [], "limit": max_items}
+    clean = {"date": None, "raw_items": [], "limit": max_items} #skapar resultatpaket
     result = {"valid": False, "errors": errors, "clean": clean}
-    if date_input is None:
-        errors.append("Ange ett datum")
+    if date_input is None: #om datum saknas
+        errors.append("Ange ett datum") #tillsätt felmeddelande
         return result
-    elif date_input == "":
+    if date_input == "":
         errors.append("Ange ett datum")
         return result
     try:
