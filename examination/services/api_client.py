@@ -69,7 +69,6 @@ def fetch_quote_for_date(ticker, date):
 """huvudfunktion som tar emot lista av tickers + datum, loopar igenom
 hämtar open,high,low,close och räknar ut pct_change, samlar varningar
 bygger lista för output"""
-#steg i fetch_prices
 #1. loopa tickers    2. hämta quote    3. hämta namn 
 #4. hantera saknade fält    5. räkna pct_change
 #6. bygg en rad    7. samla varningar    8. returnera data + warnings
@@ -82,12 +81,17 @@ def fetch_prices(items, date):
             warnings.append(f"Ingen data för {ticker} på {date}")
             continue
         name = lookup_name(ticker)
-        high = quote.get("high")
+        high = quote.get("high") 
         open_ = quote.get("open")
         close = quote.get("close")
         low = quote.get("low")
         if open_ is None or high is None or low is None or close is None:
-            warnings.append(f"Ofullständig data för {ticker} på {date}")  
+            warnings.append(f"Ofullständig data för {ticker} på {date}")
+        pct = compute_pct_change(open_, close,) #procenträkning enl funktion längre upp
+        row = {"ticker": ticker, "name": name, "open": open_, "close": close,  "high": high, "low": low, "pct_change": pct}
+        rows.append(row)
+    return {"data": rows,
+            "warnings": warnings}
 
 """läser api värden utan att krascha, returnar värde eller default"""
 def safe_get(d, key, default=None):
