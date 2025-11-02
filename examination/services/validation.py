@@ -56,16 +56,16 @@ def validate_input(tickers_input, date_input):
             errors.append("Datum får inte vara i framtiden")
             return result
     except ValueError:
-        errors.append("Ogiltig datumformat. Använd YY-MM-DD")
+        errors.append("Ogiltig datumformat. Använd YYYY-MM-DD")
         return result
-    if tickers_input is None or "":
+    if tickers_input is None or tickers_input.strip() == "":
         errors.append("Ange minst en ticker eller företagsnamn")
         return result
-    items = tickers_input.split(",") #tar  bort kommatecken
+    items = tickers_input.split(",") #delar på kommmatecken
     cleaned_items = []
     for item in items:
         trimmed_item = item.strip() #trimmar bort whitespace
-    cleaned_items.items.append(trimmed_item)  #lägger in det trimmade i listan
+        cleaned_items.items.append(trimmed_item)  #lägger in det trimmade i listan
     final_items = [] #skapar ny lista
     for i in cleaned_items: #loopar igenom cleaned_items som inte är tom
         if i != "":  # städar upp tomma strängar
