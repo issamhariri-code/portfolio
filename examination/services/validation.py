@@ -81,3 +81,18 @@ def validate_input(tickers_input, date_input):
     for item in clean["raw_items"]:
         upper_item = item.upper() #checkar stora versaler
         new_list.append(upper_item) #sparar det i listan new_list
+    
+    deduped_list = []
+    for item in new_list:
+        if item not in deduped_list:
+            deduped_list.append(item)
+    clean["items"] = deduped_list
+    allowed_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-" #Giltiga tecken i applikationen råkodat
+    for item in clean["items"]: #startar ny loop
+        for ch in item: #loopar över tecken i varje item
+            if ch not in allowed_letters: #säkerhetscheck om giltigt tecken inte är i allowed_letters
+                errors.append(f"Ogiltiga tecken i {item}") #felmeddelande
+                return result
+
+    result["valid"] = True
+    return result
