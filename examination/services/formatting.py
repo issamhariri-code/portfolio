@@ -1,8 +1,7 @@
 """
-Syfte:
-Formatera siffror för visning i tabellen.
+formatera siffror för visning i tabellen.
 
-Input:
+input:
 prisvärden (float eller None)
 procentvärden (float eller None)
 Output:
