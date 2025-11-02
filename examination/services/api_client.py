@@ -1,29 +1,29 @@
 """
-Syfte: Hämta prisdata för varje ticker för ett valt datum,
-Returnera lista med dataposter + eventuella varningar
+syfte:
+den här filen hämtar all data för aktier, open,high,low,close + namn
+all logik som pratar med API ligger här vi samlar varningar istället
+för att krascha så appen kan visa data även om något saknas.
 
-Input: tickers [lista] exempelvis: [AAPL, TSLA]
-date (str): yyyy-mm-dd
+huvudfunktion:
+fetch_prices(items, date)
+tar emot en lista med tickers och ett datum
+loopar varje ticker, hämtar open,high,low,close + företagsnamn
+bygger en lista med poster
+samlar varningar om något saknas
+returnerar {"data": [...], "warnings": [...]} dict format
 
-Output:
-data: lista av poster med:
-ticker, name, open, high, low, close, pct_change (ändring i procent)
-varningar: lista av strängar
+output-format:
+{
+    "data": [ {ticker, name, open, high, low, close, pct_change}, ... ],
+    "warnings": ["Ingen data för TSLA", "NVDA saknar 'high'"]
+}
 
-Metod:
-Hämta prisinformation per ticker
-beräkna procentändring om open/close finns tillgängligt
-om data saknas - varning
-vid api fel/404/timeout - varning sedan fortsätt 
-
-Planering:
-loopa igenom tickers med hämtat börs api
-hämta data för varje ticker
-skapa datapost och lägg i output
-samla varningar
-
+regler:
+max 10 tickers per gång (garanteras redan i valideringen).
+inga exceptions ska gå vidare — bara warnings.
 """
-# Dataformat per post (exempel):
+
+# dataformat per post (exempel):
 # { "ticker": "...", "name": "...", "open": x, "high": x, "low": x, "close": x, "pct_change": x }
 # pct_change = (close - open) / open * 100
 
