@@ -5,10 +5,6 @@ Input:
 tickers_input (str), exempelvis: AAPL, tsla, Nvidia (lower,upper, hela namnet)
 date_input(str), exempelvis: 2025 - 10 - 22
 
-Output:
-valid (bool)
-errors (lista med strängar)
-
 Felmeddelanden:
 Ange ett datum
 Ogiltigt datum
@@ -17,7 +13,6 @@ Datum får inte vara i framtiden
 Max 10 tickers tillåtna åt gången
 Ogiltiga tecken i {värde}
 
-Planen är att:
 kontrollera datum, dela upp tickers, kontrollera antal och format, returnera
 """
 import datetime
@@ -48,21 +43,21 @@ def validate_input(tickers_input, date_input): #säker och tydlig rensning av in
     try:
         parsed_date = datetime.date.fromisoformat(date_input)
         clean["date"] = parsed_date
-        today = datetime.date.today()
-        if clean["date"] < min_date:
-            errors.append("Datum får inte vara före 2022-11-01")
+        today = datetime.date.today() #hämtar dagens datum
+        if clean["date"] < min_date: #om datum är före variabel min_date som är satt i börjana av koden
+            errors.append("Datum får inte vara före 2022-11-01") #tillsätt felmeddelande
             return result
-        if clean["date"] > today:
-            errors.append("Datum får inte vara i framtiden")
+        if clean["date"] > today: #om datum är satt i framtiden
+            errors.append("Datum får inte vara i framtiden") #tillsätt felmeddelande
             return result
-    except ValueError:
-        errors.append("Ogiltig datumformat. Använd YYYY-MM-DD")
+    except ValueError: #fångar felaktigt värde
+        errors.append("Ogiltig datumformat. Använd YYYY-MM-DD") #felmeddelande
         return result
-    if tickers_input is None or tickers_input.strip() == "":
-        errors.append("Ange minst en ticker eller företagsnamn")
+    if tickers_input is None or tickers_input.strip() == "": #tar bort mellanslag (whitespace)
+        errors.append("Ange minst en ticker eller företagsnamn") #felmeddelande
         return result
     items = tickers_input.split(",") #delar på kommmatecken
-    cleaned_items = []
+    cleaned_items = [] 
     for item in items:
         trimmed_item = item.strip() #trimmar bort whitespace
         cleaned_items.items.append(trimmed_item)  #lägger in det trimmade i listan
