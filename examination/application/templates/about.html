@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  body { font-family: Arial, sans-serif; background: #e7f3ff; }
+  .wrap { max-width: 800px; margin: 24px auto; padding: 0 12px; }
+  h1 { margin: 0 0 12px; }
+  p  { line-height: 1.5; }
+  .card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; }
+
+  /* Bild-container */
+  .img {
+      margin: 20px 0;       
+      text-align: center;   
+  }
+
+  /* Själva bilden */
+  .img img {
+      max-width: 50%;       /* gör bilden snygg / ej för stor */
+      height: auto;
+      display: block;       /* krävs för auto-centering */
+      margin: 0 auto;       /* centrera */
+      border-radius: 8px;
+      border: 1px solid #ddd;
+  }
+</style>
+
+<section class="wrap">
+
+  <h1>Om BörsLexikon</h1>
+
+  <p>
+    En hemsida där du kan söka upp olika aktier och se hur det har gått
+    ur olika perspektiv. Du kan lista upp flera tickers samtidigt,
+    för att bespara tid. Har själv ett stort intresse för aktier.
+    De apparna jag använder låter mig se 1 aktie i taget
+    med samma perspektiv. Här får du upp till 10 aktier åt gången.
+  </p>
+
+  <footer style="margin-bottom: 16px;">
+    Student at Nackademin. DevOps 25.
+  </footer>
+
+  <div class="img">
+    <img src="{{ url_for('static', filename='images/bors.png') }}">
+  </div>
+
+  <div class="card">
+      <p>
+          BörsLexikon är en enkel liten webbapp som jag har byggt i Python och Flask som en del av mina studier.
+          Målet med projektet är att hämta riktiga aktiedata från den amerikanska börsen och presentera det på ett
+          tydligt sätt.
+      </p>
+
+      <p>
+          Idén kom egentligen från att jag själv ofta går in och kollar kurser på olika sidor, och jag ville skapa
+          något som samlar flera tickers på en gång i stället för att söka en och en. Här kan man till exempel skriva
+          in flera tickers samtidigt och få upp öppningspris, högsta, lägsta och stängningspris för ett specifikt datum.
+      </p>
+
+      <p>
+          Fokus ligger på enkelhet. Det ska vara lätt att skriva in sina tickers, se resultat och snabbt få en överblick.
+          Appen använder Marketstack-API för att hämta data och hanterar fel på ett tryggt sätt utan att krascha.
+      </p>
+
+      <p>
+          Jag läser DevOps-programmet på Nackademin (klass DevOps 25), och det här är ett av projekten vi gjort under kursen
+          i Programmering 2. Det här projektet har hjälpt mig att lära mig mer om Flask, API-anrop, validering och hur man
+          bygger upp en logisk struktur i en liten applikation.
+      </p>
+
+      <p>
+          <strong>Det kommer fler uppdateringar framöver, som bättre filtrering och kanske stöd för fler börser, men just nu är
+          fokus på att göra grunden så stabil och tydlig som möjligt.</strong>
+      </p>
+  </div>
+
+</section>
+{% endblock %}

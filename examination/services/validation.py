@@ -15,20 +15,49 @@ Ogiltiga tecken i {värde}
 
 kontrollera datum, dela upp tickers, kontrollera antal och format, returnera
 """
-import datetime
+from datetime import datetime, date
 
-# Regler:
-# datum: inte tomt, inte före 2022-11-01, inte efter idag
-# tickers: minst 1, max 10, korrekta tecken
-# tomma poster tas bort, versaler normaliseras
-
-# rådatahantering här finslipar vi arbetat, trimmar,splittar på inputs, filterar bort tomma inputs
+# rådatahantering här finslipar vi arbetat, trimmar,splittar på inputs, 
+# filterar bort tomma inputs
 # kollar max antal tickers och sparar i rätt lista, hanterar datumfel.
 
 #minsta tillåtna datum
-min_date = datetime.date(2022, 11, 1)
+min_date = date(2022, 11, 1)
 #max antal ticker per sökning
 max_items = 10
+
+def is_valid_date(value: str) -> bool:
+    """
+   Returnerar True om datum är i giltigt datumformat
+    """
+    # tomt värde - ogiltigt
+    if not value:
+        return False
+    # delar upp datumet
+    delar = value.split("-")
+    if len(delar) != 3:
+        return False
+   
+    år, månad, dag = delar
+    # alla delar måste vara siffror
+    if not (år.isdigit() and månad.isdigit() and dag.isdigit()):
+        return False
+    # kontrollera längden på varje del
+    if len(år) != 4 or len(månad) != 2 or len(dag) != 2:
+        return False
+
+    # konvertera till heltal
+    år = int(år)
+    månad = int(månad)
+    dag = int(dag)
+
+    # enkel månadskontroll
+    if månad < 1 or månad > 12:
+        return False
+    # enkel dagskontroll
+    if dag < 1 or dag > 31:
+        return False
+    return True
 
 def validate_input(tickers_input, date_input): #säker och tydlig rensning av indata
     errors = []
@@ -41,35 +70,39 @@ def validate_input(tickers_input, date_input): #säker och tydlig rensning av in
         errors.append("Ange ett datum")
         return result
     try:
-        parsed_date = datetime.date.fromisoformat(date_input)
+        parsed_date = date.fromisoformat(date_input)
         clean["date"] = parsed_date
-        today = datetime.date.today() #hämtar dagens datum
-        if clean["date"] < min_date: #om datum är före variabel min_date som är satt i börjana av koden
-            errors.append("Datum får inte vara före 2022-11-01") #tillsätt felmeddelande
+        today = date.today()
+        
+        if clean["date"] < min_date:
+            errors.append("Datum får inte vara före 2022-11-01")
             return result
-        if clean["date"] > today: #om datum är satt i framtiden
-            errors.append("Datum får inte vara i framtiden") #tillsätt felmeddelande
+        if clean["date"] > today:
+            errors.append("Datum får inte vara i framtiden")
             return result
-    except ValueError: #fångar felaktigt värde
-        errors.append("Ogiltig datumformat. Använd YYYY-MM-DD") #felmeddelande
+    except ValueError:
+        errors.append("Ogiltigt datumformat")
         return result
+    
     if tickers_input is None or tickers_input.strip() == "": #tar bort mellanslag (whitespace)
-        errors.append("Ange minst en ticker eller företagsnamn") #felmeddelande
+        errors.append("Ange minst en ticker") #felmeddelande
         return result
     items = tickers_input.split(",") #delar på kommmatecken
     cleaned_items = [] 
     for item in items:
         trimmed_item = item.strip() #trimmar bort whitespace
-        cleaned_items.items.append(trimmed_item)  #lägger in det trimmade i listan
+        cleaned_items.append(trimmed_item)
+    
     final_items = [] #skapar ny lista
     for i in cleaned_items: #loopar igenom cleaned_items som inte är tom
         if i != "":  # städar upp tomma strängar
-           final_items.append(i)  #appendar in i listan final_items
+            final_items.append(i)  #appendar in i listan final_items
+    
     if final_items == []: #om listan är tom
-        errors.append("Ange minst en ticker eller företagsnamn") #felmeddelande
+        errors.append("Ange minst en ticker") #felmeddelande
         return result
     if len(final_items) > max_items: #om användaren skriver in fler än vad max_items tillåter som är 10
-        errors.append("Max 10 tickers är tillåtna") #felmeddelande
+        errors.append("Max 10 tickers") #felmeddelande
         return result
     clean["raw_items"] = final_items
     new_list = []

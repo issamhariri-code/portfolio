@@ -17,32 +17,98 @@ perspektiv valet så rätt val är valt efter POST fel-->
 
 {% extends "base.html" %}
 {% block content %}
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    background: #e7f3ff;}
+  .wrap { max-width: 800px; margin: 24px auto; padding: 0 12px; }
+  h1 { margin: 0 0 12px; }
+  .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; background: #fff; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .field { flex: 1 1 220px; min-width: 220px; }
+  label { display:block; font-size: 0.9rem; margin-bottom: 4px; color:#444; }
+  input, select { width:100%; padding: 8px; border:1px solid #ccc; border-radius:6px; }
+  button { padding: 10px 14px; border:0; border-radius:6px; background:#222; color:#fff; cursor:pointer; }
+  .help { font-size: 0.9rem; color:#666; margin-top: 8px; }
+  ol.help { margin-top: 8px; padding-left: 20px; }
+ol.help li { margin-bottom: 4px; color: #444; }
+.notice {
+  margin: 8px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 0.95rem;
+}
+</style>
 
-<section>
-    <h1>Sök Aktier</h1>
+<section class="wrap">
 
-    <div class="messages"></div>
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-        {% endif %}
-<!--här kommer felmeddelanden att visas-->
-<!--{messages}-->
-    <form method="POST" action="/stocks">
-        <input type="text" name="tickers" value="{{ tickers_input }}">
-        <input type="date" name="date" value="{{ date_input }}">
+    <h1>BörsLexikon</h1>
+    <p><strong>Den här hemsidan hämtar End Of Day Data ifrån den amerikanska börsen.</strong></p>
+    <div class="notice">
+  Obs: Stöd för europeiska/svenska tickers kommer i en senare version.
+</div>
+    <p>Sök aktiepriser på valfritt datum</p>
+    <div class="card">
+        <form method="POST" action="/">
+            <div class="row">
+                <div class="field">
+                    <label for="tickers">Ticker eller namn</label>
+                    <input type="text" name="tickers" id="tickers"
+                           placeholder="t.ex. AAPL, Tesla, NVDA"
+                           value="{{ tickers_input }}">
+                </div>
 
-        <select name="perspective">
-        <option value="daily" {% if perspective == "daily" %}selected{% endif %}>Daily</option>
-        <option value="weekly" {% if perspective == "weekly" %}selected{% endif %}>Weekly</option>
-        </select>
-        <button type="Submit">Sök</button>
-    
-    </form>
+                <div class="field">
+                    <label for="date">Datum</label>
+                    <input type="date" name="date" id="date" value="{{ date_input }}">
+                </div>
 
-    <p>Tips och hjälpexempel: För att få data om aktier skriv företags
-        ticker symbol, exempelvis: TSLA, NVDA, AAPL eller AMZN
-        Fungerar även att skriva in företagets namn som "Apple"
+                <div class="field">
+                    <label for="perspective">Perspektiv</label>
+                    <select name="perspective" id="perspective">
+                        <option value="daily" {% if perspective == "daily" %}selected{% endif %}>Daglig</option>
+                        <option value="weekly" {% if perspective == "weekly" %}selected{% endif %}>Veckovis</option>
+                    </select>
+                </div>
+
+                <div class="field" style="flex:0 0 auto;">
+                    <label>&nbsp;</label>
+                    <button type="submit">Sök</button>
+                </div>
+            </div>
+
+            {% if messages %}
+                <div class="help">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <p class="help">
+        Tips: Skriv t.ex. <strong>AAPL</strong>, <strong>TSLA</strong> eller företagsnamn som
+        <strong>"Apple"</strong> eller <strong>"Tesla"</strong>Vill du söka data
+        för hela börsen så måste du skriva in en ticker.
+        <strong>Exempel:</strong> Microvast Holdings har ticker MVST. De företagsnamn där
+        man inte behöver skriva in en Ticker är <strong>följande:</strong>
     </p>
+<ol class="help">
+    <li><strong>Tesla</strong></li>
+    <li><strong>Apple</strong></li>
+    <li><strong>Red Cat</strong></li>
+    <li><strong>Nvidia</strong></li>
+    <li><strong>Amazon</strong></li>
+    <li><strong>Ondas</strong></li>
+    <li><strong>Alphabet</strong></li>
+    <li><strong>Microsoft</strong></li>
+    <li><strong>Palantir</strong></li>
+    <li><strong>Google</strong> (samma som Alphabet)</li>
+</ol>
+
+</section>
 {% endblock %}

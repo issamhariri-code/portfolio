@@ -3,7 +3,6 @@
 {# Använde HTML kommentar i koden så att användaren kan se det på webbläsarens
 källa, detta är en jinja kommentar som försvinner #}
 <!--kontext för result.html
-i yaml form :D
 summary: {
 date: str
 perspective_label: str exempelvis, pris högst > lägst 
@@ -12,15 +11,44 @@ messages: är varningar från api_client i form av lista, exempelvis saknad data
 data: lista av poster som ticker,name,open,close,high,low,pct_change
 empty: True (bool) om data är helt tom som jag tidigare nämnt ska inte index kracsha för en
 felaktig input eller tom data, index.html renderas även om en ticker kraschar.}-->
+<style>
+  table { border-collapse: collapse; margin-top: 12px; }
+  th, td { border: 1px solid #ccc; padding: 8px 10px; }
+  th { text-align: left; }
+  .summary p, .Messages p { margin: 4px 0; }
+  .no-results { margin-top: 10px; font-style: italic; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #e7f3ff;}
+</style>
 <section>
-    <h1>Result</h1>
+    {% if title %}
+        <h1>{{ title }}</h1>
+    {% else %}
+        <h1>Resultat</h1>
+    {% endif %}
 
-    <div class="Summary">
+    <div class="summary">
+        {% if date %}
+            <p>Datum: {{ date }}</p>
+        {% endif %}
+
+        {% if perspective_label %}
+            <p>Perspektiv: {{perspective_label }}</p>
+        {% endif %}
+         
+        {% if count is not none %}
+            <p>Antal rader: {{ count }}</p>
+        {% endif %}
         
     </div>
 
     <div class="Messages">
-
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
     </div>
     <!--Tabell resultatet, där all data för den tickern som användaren har valt.-->
     <table> <!--All tabelinnehåll ligger inuti table som startar själva tabellen.-->
@@ -36,14 +64,27 @@ felaktig input eller tom data, index.html renderas även om en ticker kraschar.}
                 </tr>
                 </thead>
             <tbody>
-
+                {% if data %}
+                    {% for row in data %}
+                        <tr>
+                            <td>{{row.ticker}}</td>
+                            <td>{{row.name}}</td>
+                            <td>{{row.open}}</td>
+                            <td>{{row.high}}</td>
+                            <td>{{row.low}}</td>
+                            <td>{{row.close}}</td>
+                            <td>{{row.pct_change}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
             </tbody>
     </table>
 
     <div class="no-results">
-
+        {% if empty %}
+            <p>Inga resultat att visa</p>
+        {% endif %}
     </div>
-
-    <a href="Tillbaka till sökrutan"></a> <!--Länk tillbaka till annan endpoint-->
+    <a href="/">Tillbaka till sökrutan</a><!--Länk tillbaka till annan endpoint-->
 
 {% endblock %}

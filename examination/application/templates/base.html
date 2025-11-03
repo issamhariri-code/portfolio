@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    
-    </head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BörsLexikon</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ikon.png') }}?v=3">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/ikon.png') }}?v=3">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    {% block styles %}{% endblock %}
 </head>
 <body>
-    <header>Välkommen till BörsLexikon!</header>
-    <main></main>
-    <footer></footer>
-    
+    <header>
+        <strong>Välkommen till BörsLexikon!</strong>
+        <nav>
+            <a href="/">Start</a>
+            <a href="/about">Om</a>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Fotnot</p>
+    </footer>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
