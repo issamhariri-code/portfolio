@@ -1,0 +1,93 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fysisk Aktivitet för Datoranvändare</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Risker med Stillasittande och Vikten av Fysisk Aktivitet</h1>
+    <nav>
+      <ul>
+        <li><a href="#introduction">Introduktion</a></li>
+        <li><a href="#risks">Risker med Stillasittande</a></li>
+        <li><a href="#benefits">Vikten av Fysisk Aktivitet</a></li>
+        <li><a href="#videos">Träningsvideos</a></li>
+        <li><a href="#tips">Tips & Råd</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="introduction">
+    <h2>Introduktion</h2>
+    <p>Denna hemsida handlar om riskerna med att sitta stilla för länge och varför det är viktigt att hålla sig aktiv, speciellt för personer som spenderar mycket tid framför datorer.</p>
+  </section>
+
+  <!-- Ytterligare sektioner här -->
+  
+  <footer>
+    <p>© 2024 Fysisk Aktivitet för Datoranvändare</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+CSS
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+header {
+  background-color: #3498db;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+footer {
+  text-align: center;
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+
+
+JAVA
+
+
+// Detta kan användas för att hantera fliknavigering eller liknande funktioner
+function showSection(id) {
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    if (section.id === id) {
+      section.style.display = 'block';
+    } else {
+      section.style.display = 'none';
+    }
+  });
+}
+
