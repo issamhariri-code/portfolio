@@ -6,7 +6,9 @@ kolumnerna finns
 testa att felaktig input hanteras
 
 """
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pytest
 import pandas as pd

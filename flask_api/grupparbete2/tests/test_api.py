@@ -7,7 +7,9 @@ resultat ska vara av rätt typ
 testa att datan om den finns, har rätt struktur.
 
 """
-
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from ElprisApp.utils.api_handler import get_elpriser
 
 def test_get_elpriser_returns_data():

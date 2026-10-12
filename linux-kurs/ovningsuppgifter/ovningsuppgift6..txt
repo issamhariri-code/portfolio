@@ -70,3 +70,78 @@ grep -i Kaskelottval /usr/share/hunspell/sv_SE.dic || echo "Ordet finns inte i o
 || = gör nästa om vänster < misslyckades 
 && = gör nästa om vänster < lyckades 
 Övningsuppgift 6.24
+if grep -qi Kaskelottval /usr/share/hunspell/sv_SE.dic; then
+echo "Kaskelottval finns i sv_SE.dic" fi (fi avslutar if sats i bash)
+Övningsuppgift 6.25
+sasdecho "Kaskelottval finns i sv_SE.dic" else
+echo "Kaskelottval finns inte sv_SE.dic"
+fi 
+Övningsuppgift 6.28
+Kontrollerar antal argument:
+if test $# -ne 2; then (om antal arugment inte är 2>fel)
+kontrollerar om arugmenten är filer
+if test ! -f "$1"; then
+(om första argumentet inte är vanlig fil > fel)
+echo "fel..." >£2 (skrivs som felmeddelande, inte output)
+jämför datumstämplar med >
+if test "$1" -nt "$2"; then
+echo "$1" else > echo "$2" fi
+-nt = newer than
+Övningsuppgift 6.29
+test $# -ne 2 | [ $# -ne 2 ] = betyder samma sak
+Övningsuppgift 6.35
+Argumentvalidering. Kontrollerar att användar skickar in
+exakt ett argument med $# > kontrollerar att det är 
+en vanlig fel med > [ ! -f "$1" ]; > om allt är rätt:
+du -h "$1" visar filens storlek för mänsklig läsning
+tips: man du (-h) readable for humans.
+Övningsuppgift 6.38
+Räknar antalet argument:
+if [ $# -eq 0 ]; (skickar error om argument = 0)
+for arg in "$@"; do
+echo "Hej $arg"
+done > (Skickar antal argument + hej om argument ges)
+exempel: ./upg6_38 = 0 args 
+exempel: ./upg6_38 Issam = 1 args
+Övningsuppgift 6.40
+Utan argument körs inte loopen alls, men utskriften
+körs ändå.
+for arg in "$@"; do 
+    echo "$arg"
+done > #körs bara om argument ges
+echo "Skriptet är klart" #körs alltid (utanför loop)
+Övningsuppgift 6.41
+Tar emot filer som argument "$@"
+Om något inte är en fil > avbryt
+ALLT="upg6_41_allt_$RANDOM" (skapar nytt filnamn)
+cat "$arg" > loopar igenom filer och läser innehåll
+done > "$ALLT" > output till ny fill
+Övningsuppgift 6.44
+Scriptet går igenom en foor loop som väntar på att en _greet.txt fil 
+ska finnas utifrån {person} listan. Om filen inte skapas då loopar den
+istället igenom samtliga namn från listan med en Hello fras.
+if satsen väntar alltså på exempelvis: "Tjena Svante!" > svante_greet.txt
+eftersom att if raden lyder if [ -f "${person}_greet.txt" ];
+Övningsuppgift 6.45
+for file in *.txt; do > du "$file" cat "$file" > done
+* letar efter alla filer som slutar på txt och sedan läser innehåll (cat)
+Övningsuppgift 6.47
+while read -p "Ange ett namn:" namn; do
+if [ "$namn" = "" ]; then > break > else > echo "hej $namn" fi > done
+While loop går igenom tills villkor bryts om namn är tomt break (Enter)
+Övningsuppgift 6.48
+Gör en loop med > while true(oändlig loop) clear rensar skärmen >
+date +%T > hämtar tiden se (man date) | figlet > stor text
+sleep 5 > väntar 5 sekunder tills nästa loop går igenom
+Övningsuppgift 6.49
+[ ! -e "$filnamn" ] - körs medan filen inte finns
+[ -e "$filnamn" ] - körs så länge filen finns
+Öppna en ny terminal (open new window) skriv touch testfil > ny output kommer > sedan rm testfil
+Då avslutas loopen efter echo "Avslutar"
+Övningsuppgift 6.57
+while IFS= read -r "$rad"; do
+IFS delar upp mellanslag och tabbar, -r ser inte \ som specialtecken, gör filen robust.
+done < upg6_57_text.txt (det som gör att filen skickas som stdin till loopen)
+loopen läser innehåll ifrån filen.
+Övningsuppgift 6.60
+
