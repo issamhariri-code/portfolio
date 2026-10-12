@@ -1,0 +1,35 @@
+<!-- ...existing code... -->
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <meta charset="utf-8">
+        <title>Hemsida</title>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col">
+                <h1 class="border m-5"> Välkommen {{ namn }}</h1>
+            </div>
+        </div>
+
+        <p> Välkommen {{ namn }}, till din inloggningssida för Flask Webbapplikationer</p>
+
+        <form method="post" action="{{ url_for('login') }}">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input name="username" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control" id="password">
+          </div>
+          <div class="mb-3 form-check">
+            <input name="remember" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </body>
+</html>

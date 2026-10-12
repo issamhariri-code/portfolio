@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="app-title">⚡ ElprisApp ⚡</h1>
+
+    <div class="form-container">
+        <h2>Sök elpriser 🔍</h2>
+        <form action="/result" method="post">
+            <label for="year">År:</label>
+            <input type="text" name="year" id="year" placeholder="t.ex. 2025" required><br>
+
+            <label for="month">Månad:</label>
+            <input type="text" name="month" id="month" placeholder="t.ex. 10" required><br>
+
+            <label for="day">Dag:</label>
+            <input type="text" name="day" id="day" placeholder="t.ex. 27" required><br>
+
+            <label for="area">Område:</label>
+            <select name="area" id="area">
+                <option value="SE1">SE1 ⚡Luleå</option>
+                <option value="SE2">SE2 ⚡Sundsvall</option>
+                <option value="SE3">SE3 ⚡Stockholm</option>
+                <option value="SE4">SE4 ⚡Malmö</option>
+            </select><br>
+
+            <button type="submit" class="search-button">🔎 Sök elpris</button>
+        </form>
+    </div>
+
+    {% if last_search %}
+        <p class="last-search">Senaste sökning: {{ last_search }}</p>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ElprisApp{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+</head>
+<body>
+    <div id="map" style="height: 400px;"></div>
+    <script>
+        var map = L.map("map").setView([59.333198263167716, 18.04769366144777], 13);
+       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+        L.marker([59.3293, 18.0686]).addTo(map)
+            .bindPopup("SE3 Stockholm")
+            .openPopup();
+
+        L.marker([65.5851537500001, 22.156278866422507]).addTo(map)
+            .bindPopup("SE1 Luleå")
+            .openPopup();
+
+        L.marker([62.389001290108446, 17.306942002803556]).addTo(map)
+            .bindPopup("SE2 Sundsvall")
+            .openPopup();
+
+        L.marker([55.602267689379794, 13.002227089341252]).addTo(map)
+            .bindPopup("SE4 Malmö")
+            .openPopup();
+    </script>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash">
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+        
+</body>
+</html>
+

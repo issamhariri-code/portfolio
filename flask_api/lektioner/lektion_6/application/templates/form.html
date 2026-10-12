@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Form{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row p-5">
+            <div class="col-1"></div>
+            <div class="col-10 border p-3">
+                <h1 class="text-center">Form</h1>
+                <form action="api" method="post">
+                    <label for="year">Year:</label><br/>
+                    <input type="text" id="year" name="year"><br/>
+                    <label for="ccode">Country code:</label><br/>
+                    <input type="text" id="ccode" name="countrycode"><br/>
+                    <select id="ccode" name="countrycode" class="form-select">
+                        {% if countries %}
+                            {% for c in countries %}
+                                <option value="{{c.countryCode}}">{{c.name}}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option value="SE">Sweden</option>
+                        {% endif %}
+                    </select></br>
+                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                </form>
+            </div>    
+            <div class="col-1"></div>
+        </div>
+    </div>
+{% endblock %}

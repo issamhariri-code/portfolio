@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="sv">
+<head><meta charset="utf-8"><title>Login</title></head>
+<body>
+    {% if error %}<p style="color: red">{{ error }}</p>{% endif %}
+    <form method="post" action="{{ url_for('login') }}">
+        <label>Username: <input name="username"></label><br>
+        <label>Password: <input name="password" type="password"></label><br>
+        <button type="submit">Logga in</button>
+    </form>
+<!-- Registrera-knapp, kallar på url efter man tryckt på "Button" registrera -->
+    <p>
+    <a href="{{ url_for('register') }}">
+      <button type="button">Registrera</button>
+    </a>
+  </p>
+</body>
+</html>

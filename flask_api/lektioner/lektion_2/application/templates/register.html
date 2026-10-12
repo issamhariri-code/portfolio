@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <title>Registrera</title>
+</head>
+<body>
+  <h1>Registrera</h1>
+
+  {% if error %}
+    <p style="color:red">{{ error }}</p>
+  {% endif %}
+
+  <form method="post" action="/register">
+    <label>
+      Användarnamn:
+      <input type="text" name="username" required>
+    </label><br>
+    <label>
+      Lösenord:
+      <input type="password" name="password" required>
+    </label><br>
+    <button type="submit">Registrera</button>
+  </form>
+</body>
+</html>
