@@ -1,0 +1,22 @@
+Python-kommandon – Grundläggande
+print() – Skriver ut till skärmen
+input() – Tar emot användarens inmatning
+type() – Visar datatypen för ett värde
+len() – Räknar antal element i sträng/lista
+int() / float() – Konverterar till heltal/decimaltal
+str() – Konverterar till sträng
+list() – Skapar en lista
+dict() – Skapar en dictionary
+if / elif / else – Villkorssatser
+for / while – Loopar
+def – Definierar en funktion
+return – Returnerar ett värde från en funktion
+import – Importerar ett bibliotek
+range() – Skapar en sekvens av siffror
+# – Kommentar som ignoreras av Python
+text = "Hello, World!" 
+print(text.upper()) # Converts to uppercase 
+print(text.lower()) # Converts to lowercase 
+print(len(text)) # Returns the length of the string 
+print(text.replace("World", "Python")) # Replace words 
+

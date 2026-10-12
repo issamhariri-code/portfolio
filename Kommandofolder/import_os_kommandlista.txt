@@ -1,0 +1,60 @@
+# ------------------------------
+# OS - Vanliga kommandon i Python
+# ------------------------------
+
+import os
+
+# 1. Fil- och mapphantering
+os.getcwd()                  # Hämta nuvarande arbetskatalog
+os.chdir('sökväg')           # Byt arbetskatalog
+os.listdir('sökväg')         # Lista filer och mappar i katalogen
+os.mkdir('mappnamn')         # Skapa en ny mapp
+os.makedirs('a/b/c')         # Skapa flera mappar i en struktur
+os.rmdir('mappnamn')         # Ta bort en tom mapp
+os.removedirs('a/b/c')       # Ta bort mappstruktur rekursivt
+os.remove('filnamn')         # Ta bort en fil
+os.rename('gammal', 'ny')    # Byt namn på fil eller mapp
+
+# 2. Kontrollera filtyp
+os.path.exists('sökväg')     # Kontrollera om sökvägen existerar
+os.path.isfile('fil')        # Är det en fil?
+os.path.isdir('mapp')        # Är det en mapp?
+os.path.islink('länk')       # Är det en symbolisk länk?
+
+# 3. Hämta sökvägsinformation
+os.path.abspath('fil')       # Fullständig sökväg till fil
+os.path.basename('sökväg')   # Filnamn från sökvägen
+os.path.dirname('sökväg')    # Katalog från sökvägen
+os.path.join('a', 'b')       # Slå ihop sökvägar
+os.path.split('sökväg')      # Dela upp sökväg i katalog + fil
+os.path.splitext('fil.txt')  # Dela upp filnamn + filtillägg
+
+# 4. Få information om filer
+os.stat('fil')               # Få metadata (storlek, ändringsdatum, etc.)
+os.path.getsize('fil')       # Storlek på fil i byte
+os.path.getmtime('fil')      # Senaste ändringstid (timestamp)
+os.path.getctime('fil')      # Skapelsedatum (timestamp)
+
+# 5. Miljövariabler
+os.environ                   # Alla miljövariabler
+os.environ['VAR']           # Hämta värde från miljövariabel
+os.environ['VAR'] = 'värde' # Sätta miljövariabel
+os.getenv('VAR')            # Alternativ metod för att hämta variabel
+
+# 6. Exekvera kommandon i systemet
+os.system('kommando')       # Kör ett terminalkommando (returvärde = statuskod)
+
+# 7. Gå igenom filer i katalog (rekursivt)
+for root, dirs, files in os.walk('sökväg'):
+    print("Mapp:", root)
+    print("Undermappar:", dirs)
+    print("Filer:", files)
+
+# 8. Arbetsrelaterad information
+os.name                     # Namn på operativsystem (t.ex. 'posix', 'nt')
+os.sep                      # Sökvägsavskiljare ('/' eller '\\')
+os.linesep                  # Radslutstecken ('\n' eller '\r\n')
+os.cpu_count()              # Antal logiska CPU-kärnor
+os.getlogin()               # Inloggad användare
+os.getpid()                 # Nuvarande process-ID
+os.uname()                  # Systeminformation (på Unix)

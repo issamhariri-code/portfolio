@@ -1,0 +1,15 @@
+Bash-kommandon – Grundläggande
+ls – Lista filer och mappar i aktuell katalog
+cd – Byt katalog
+pwd – Visa aktuell sökväg
+mkdir – Skapa ny mapp
+rm – Ta bort fil eller mapp
+touch – Skapa tom fil
+cp – Kopiera fil eller mapp
+mv – Flytta eller döp om fil/mapp
+cat – Visa innehåll i fil
+echo – Skriv ut text
+clear – Rensa terminalen
+exit – Stäng terminalsession
+man – Visa manual för kommando
+chmod – Ändra rättigheter

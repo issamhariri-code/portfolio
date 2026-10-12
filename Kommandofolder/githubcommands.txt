@@ -1,0 +1,17 @@
+Git-kommandon – Grundläggande
+git init – Skapar ett nytt Git-repo i aktuell mapp
+git clone – Kopierar ett repo från t.ex. GitHub
+git status – Visar ändringar och aktuell status
+git add – Lägger till filer till staging (inför commit)
+git commit – Sparar ändringar med ett meddelande
+git push – Skickar ändringar till fjärrrepo (t.ex. GitHub)
+git pull – Hämtar och slår ihop ändringar från fjärrrepo
+git fetch – Hämtar ändringar utan att slå ihop dem
+git log – Visar historik över commits
+git diff – Visar skillnader mellan versioner
+git branch – Visar/skapar grenar i projektet
+git checkout – Byter till annan gren eller version
+git merge – Slår ihop en gren med aktuell gren
+git remote – Hanterar koppling till fjärrrepo
+git reset – Ångrar staging eller commit
+

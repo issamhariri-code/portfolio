@@ -1,0 +1,25 @@
+python -m venv venv 
+^ Skapar den virtuella maskinen 
+
+source venv/bin/activate
+^Aktivera miljön (Linux eller mac)
+
+venv\Scripts\activate
+^Aktivera miljön (Windows)
+
+pip install <paketnamn>
+^Installera olika paket på den virtuella maskinen. 
+
+pip freeze > test.txt
+^Användas för att spara ens installerade paket i en ny text fil på ens egna dator. T.ex. om man skulle vilja spara ner några paket man tycker om och vill snabbt kunna installera dem igen på antigen sin egna maskin eller i sin virutella maskin. 
+
+pip list
+^Ger en lista på dem installerade paketen. 
+
+deactivate
+^Hur man stänger av den virutella maskinen
+
+rm -rf venv
+^Hur man raderar den virtuella maskinen från ens dator
+
+Alla dessa kommandon ska köras direkt i terminalen. 
