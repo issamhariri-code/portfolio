@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "VAR_A: $VAR_A VAR_B: $VAR_B"
+

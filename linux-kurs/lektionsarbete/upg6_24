@@ -1,0 +1,6 @@
+#!/bin/bash
+if grep -qi Shebang /usr/share/hunspell/sv_SE.dic; then
+    echo "Shebang finns i sv_SE.dic"
+else
+    echo "Shebang finns inte i sv_SE.dic"
+fi

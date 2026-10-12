@@ -1,0 +1,57 @@
+Övningsuppgift 4.1
+logga in på servern med kommando: ssh server > sudo adduser beaver > kontrollera med
+id beaver > testa inloggning: ssh -p 2222 beaver@localhost > skapa nyckelpar för beaver >
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_beaver > passphrase: LoveRivers > 
+kontrollera med ls -l ~/.ssh/id_ed25519_beaver* > kopiera nyckeln till beaver med:
+> ssh-copyid -i ~/.ssh/id_ed25519_beaver -p beaver@localhost > lägg till beaver i config
+nano ~/.ssh/config (lägg in hostname,port,user,identity) > starta ssh agenten med:
+eval "$(ssh-agent -s)" kör sen > ssh-add ~/.ssh/id_ed25519_beaver > LoveRivers >
+kör sedan ssh server-beaver > inloggning lyckas när agenten sparar key (inget lösen)
+agenten måste startas innan man kör ssh-add.
+Övningsuppgift 4.2
+För capybara följs samma metod som med Beaver skillnaden är att capybara pekar på en fil
+som ligger i en mapp med authorized key ~/upg4_2/id_rsa_capybara 
+Övningsuppgift 4.3
+Öppnar configen med nano ~/.ssh/config lägger in capybara med hostname,port,user,identity
+sparar configen. startar ssh agenten med eval "$(ssh-agent -s)" sedan kör jag:
+ssh-add ~/upg4_2/id_rsa_capybara > passphrase > exit > ssh server-capybara > klar
+inloggad nu utan att skriva lösen endast om man startar agent och skickar key till agent
+Övningsuppgift 4.4
+skapar ny användare på servern dormouse > adduser dormouse > ansluter avslutar exit >
+värddatorn: nano testfil.txt > scp -P 2222 testfil.txt dormouse@localhost:
+detta kommando är för att skicka en fil till dormouse > loggar in på server/dormouse
+kör en ls för verifiering följt av cat testfil.txt för att verifiera innehåll. >
+scp -P 2222 dormouse@localhost:testfil.txt . (för att HÄMTA en fil från dormouse)
+. på slutet är för att tala om att jag vill ha filen där jag står som är /home
+Skillnad: fil innan användare@host - betyder jag vill skicka till filen till platsen
+Skillnad: användare@host innan fil - betyder jag vill ha filen ifrån denna plats.
+scp - går åt båda hållen . ordningen avgör riktningen. 
+Övningsuppgift 4.5
+Gjorde om föregående uppgift skillnad är att jag valde server-beaver som alias
+vilket gör att jag inte behöver använda användarnamn, host, port, identity i scp
+> skickar filen via scp testfil.txt server-beaver:
+> cat testfil.txt på server-beaver ändrar innehåll 
+> hämtar filen via scp server-beaver:testfil.txt .
+> bekräftar ändringen via cat testfil.txt
+Övningsuppgift 4.6
+skapar mapp med 3 filer genom mkdir testkatalog && touch testkatalog/fil{1,2,3}
+skickar sedan med > scp -r testkatalog server-beaver:
+> rekursivt mkdir -r för att skicka mapp med innehåll.
+> alias: server-beaver för det är confat i configen, underlättar processen därav valet.
+> server-beaver: skapar 2 nya tomma filer > touch fil4 fil5
+> värddatorn: scp -r server-beaver:testkatalog .
+> -r (rekursivt för mapp med innehåll)
+Övningsuppgift 4.7
+uptime (visar hur länge servern varit igång) körde uptime på värddatorn
+och serven för att jämföra
+Övningsuppgift 4.8
+ssh server < upg4_8 för att köra scriptet till servern.
+får sedan output för ubsrv,uptime,free,ip-adress
+Övningsuppgift 4.9
+På servern ska man (ubsrv) öppna configen med kommando:
+sudo nano /etc/ssh/sshd_config 
+ändra PasswordAuthentication, PermitRootLogin, KbdInteractiveAuthentication
+till no. Ta även bort # framför.
+sedan sudo sshd -t därefter sudo systemctl restart ssh
+Viktig notis. Urskilja på servern/värddatorn så configen endast görs 
+inne på servern inte på configen. Enkelt att missa.

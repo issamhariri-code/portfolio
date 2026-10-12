@@ -1,0 +1,84 @@
+Övningsuppgift 2.1
+Open Source = Står för att källkoden är öppen, andra kan modifiera, läsa och dela
+den.
+Fri mjukvara = Innebär frihet, fokus ligger på att användaren kan köra programmet
+studera det, modifiera och sprida vidare förbättrade versioner.
+Övningsuppgift 2.2
+För att installera ett paket med apt använder man kommandot:
+sudo apt install <paketnamn>
+Svar: Ja det kräver root privilegier eftersom man gör ändringar i systemet när sudo
+används. Vid kommandot krävs oftast lösenordsverifiering.
+Övningsuppgift 2.3
+På platsen /etc finns systemets huvudsakliga konfigurationsfiler. Lokala filer som
+styr hur programmet fungerar. Där hittar man filer som: csh.login, exports, fstab m.m.
+Övningsuppgift 2.4
+apt används för att hämta själva verktyget, hantera paketkällor och beroenden.
+dpkb används för att göra installationen och hämta .deb paket på systemet.
+Övningsuppgift 2.5
+användarens hemkatalog finns i /home. Rootanvändaren har sin hemkatalog i /root.
+Övningsuppgift 2.6
+apt search <sökord> t.ex. apt search tree
+Övningsuppgift 2.7
+sudo apt update för uppdateringar, sudo apt install blender för att ladda ner paketet,
+samt beroenden, sen skriv blender i terminalen för att starta, sudo apt remove för
+att ta bort blender, sudo apt autoremove för att få bort beroenden av apt på systemet.
+Övningsuppgift 2.8
+/sbin /usr/sbin
+Övningsuppgift 2.9
+sudo apt update
+Övningsuppgift 2.10
+kärnutrymme (kernel space) körs i operativsystemets kärna. Där kärnan arbetar och
+har full åtkomst till hårdvara och systemresurser.
+Användarutrymme (user space) där vanliga program körs av användaren, till exempel bash
+terminalen för att prata med kernel space.
+Övningsuppgift 2.11
+apt list --installed
+Övningsuppgift 2.12
+sudo apt update - uppdaterar själva katalogen för programvaran och hämtar all ny info,
+görs dock inga uppdateringar utan bara själva katalogen.
+sudo apt upgrade - installerar själva uppdateringen av programvaran(försiktigare vers)
+sudo apt full-upgrade är för fullständig uppgradering där systemet får ta bort paket
+om det krävs för att lösa beroenden.
+Övningsuppgift 2.13
+/dev innehåller specialfiler, enhetsfiler som står för hårdvara och virtuella enheter 
+i systemet. Där måste det finnas filer som /dev/null /dev/zero /dev/tty.
+/dev/null = slänger bort data, /dev/zero = ger nollor, /dev/tty = terminalen.
+Övningsuppgift 2.14
+apt list --upgradeable
+Övningsuppgift 2.15
+sudo apt remove <paketnamn>
+sudo apt purge <paketnamn>
+Övningsuppgift 2.16
+/etc/apt/sources.list = huvudfilen med apt källor
+/etc/apt/sources.list.d/ = lösa filer i katalogen
+Övningsuppgift 2.17
+/media/dittkonto - /media/issam/MINUSB
+Övningsuppgift 2.18
+dpkg -S /sökväg/till/filen
+Övningsuppgift 2.19
+apt install ./teamviewer_15.52.3_amd64.deb
+Övningsuppgift 2.20
+apt-file search /sökväg/till/fil - ladda först ned paketet apt-file
+Övningsuppgift 2.21
+de blir kvar och tas bort med sudo apt autoremove
+Övningsuppgift 2.22
+/usr
+Övningsuppgift 2.24
+sudo apt-mark showmanual
+Övningsuppgift 2.25
+sudo apt-mark showauto
+Övningsuppgift 2.26
+dpkg -L tree - listar alla filer som kommer från paketet tree
+Övningsuppgift 2.27
+apt search IBM typeface
+sudo apt install fonts-ibm-plex
+dpkg -L fonts-ibm-plex
+filerna hamnar i /usr/share - checkar via dpkg -L fonts-ibm-plex
+Övningsuppgift 2.28
+automatiskt via /home/user/sticknamn. Kan även isntalleras på /media som temporär
+monteringsplats då det är mer flexibelt.
+Övningsuppgift 2.30
+apt depends <paketnamn> visar bereoender, relationer och konflikter.
+Övningsuppgift 2.31
+apt show <paketnamn> listar fullständig information och beskrivning
+

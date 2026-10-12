@@ -1,0 +1,26 @@
+Övningsuppgift 3.1
+touch upg3_1 > ls -l upg3_1 visa filägarskap
+Övningsuppgift 3.2
+skapade filen upg3_2 bekräftar rättigheter med ls -l upg3_2 ändrar sedan rättigheterna
+med kommandot: chmod a-w upg3_2 > bekräftar med ls -l upg3_2
+med siffror kan man även skriva chmod 444 upg3_2 då oktala siffrorna för r-w-x är
+4 r- 2 w - 1 x
+Övningsuppgift 3.3
+Skapa mappen och 2 filer i mappen mkdir upg3_3 följt touch upg3_3_fil1 + upg3_3_fil2
+kolla rättigheterna med ls -l på respektive filer ändra sedan med chmod 222 upg3_3_fil1
+bekräfta med ls -l skriv över rättigheterna från upg3_3_fil2 med kommandot:
+chmod --reference=upg3_3_fil2 upg3_3_fil1 > bekräfta med ls -l
+Övningsuppgift 3.4
+Det är möjligt att skriva i den, men du kan inte läsa filen pga nekad åtkomst.
+Övningsuppgift 3.5
+Det funkar problemet blir när man bara sätter r på alla som rättigheter så saknas
+åtkomst att komma in i katalogen vilket blir problem så istället för chmod -r 444
+så är det bättre med chmod -r 555 så att man både får execute/read.
+Övningsuppgift 3.6
+genom att ändra till -rw-rw-rw så kan kontot "green" skriva i filen. ändrade via 
+kommando: chmod a+w upg3_6 då får alla rw, men ingen har x så ingen kan gå in i filen.
+Övningsuppgift 3.7
+skapa filen touch upg3_7 > bekräfta rättigheter med ls -l upg3_7 kör sedan:
+chmod a-w upg3_7 (tar bort skrivrättigheter) testa med echo "hejsan" >> upg3_7
+åtkomst nekad
+Övningsuppgift 3.8

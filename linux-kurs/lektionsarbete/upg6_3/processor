@@ -1,0 +1,6 @@
+#! /bin/bash
+
+
+for i in one two; do echo Processing $i; sleep 1; done
+echo "Error! Something is wrong with three" >&2; sleep 1
+for i in four five; do echo Processing $i; sleep 1; done

@@ -1,0 +1,98 @@
+Övningsuppgift 1.1
+Identifiering av sökvägar
+Beskriv hur man absolut och direkt kan avgöra om en sökväg är relativ eller absolut.
+Absolut sökväg börjar med /
+En relativ sökväg är inte absolut.
+Övningsuppgift 1.2
+Kortast sökväg för att komma till upg1_2/a/b/c
+kortast sökväg är: upg1_2/a/b/c
+navigering dit: cd upg1_2/a/b/c 
+Övningsuppgift 1.3
+Relativa sökvägen blir cat /etc/fstab
+Svar: Nej
+Övningsuppgift 1.4
+Kommandot cd / tar mig till rotkatalogen
+Svar: Ja genom cd .. eller ../../ beroende var man står
+Övningsuppgift 1.5
+cd flyttar dig upp en nivå i filsystemet
+Övningsuppgift 1.6
+mkdir -p upg1_6/a/b/c - kommandoraden skapar mapp som heter uppg1_6 med undermappar
+a,b och c.
+cd uppg1_6/a/b/c tar mig till mappen c genom en absolut sökväg.
+Övningsuppgift 1.7
+kommandoraden cd .. flyttar dig upp en nivå i filsystemet
+Övningsuppgift 1.8
+cd . håller dig kvar på samma nivå i filsystemet
+Övningsuppgift 1.9
+pwd visar var du står i filsystemet om du är i home/administrator och kör pwd
+kommer outputen visa home/administrator/
+Övningsuppgift 1.10 du kan köra en absolut sökväg t.ex. 
+ls /home/administrator/etc
+om du står i etc så kan du bara köra ls
+du kan även skriva ls etc om du befinner dig i /administrator
+du kan även köra ls ~/etc som tar dig från rotkatalogen till etc. 
+Övningsuppgift 1.11
+ls visar alla filer i mappen
+Övningsuppgift 1.12
+ls -la listar alla filer/rättigheterna vem som skapade filen och ger dig en lång lista
+Övningsuppgift 1.13
+cat upg1_13
+Övningsuppgift 1.14
+navigerar med piltangenterna, avslutar med q, finner sökord med n och n
+Övningsuppgift 1.15
+touch upg1_15
+Övningsuppgift 1.16
+cp upg1_16 upg1_162
+Övningsuppgift 1.17
+cp -r upg1_17 upg1_172 kopierar kataloger
+Övningsuppgift 1.18
+rmdir upg1_18 raderar tomma kataloger
+Övningsuppgift 1.19
+nej tar bara bort tomma kataloger
+Övningsuppgift 1.20
+rm upg1_20 tar bort filen rm tar bort filer.
+Övningsuppgift 1.21
+rm -r upg1_21 
+Övningsuppgift 1.22
+find / -iname '*.txt
+Övningsuppgift 1.23
+find . -iname '*backup*'
+Övningsuppgift 1.24
+locate backup
+Övningsuppgift 1.25
+grep 30 upg1_25 (grep söker efter mönster i fil - 30 är vad man letar - upg1_25 är filen)
+Övningsuppgift 1.26
+Svar: grep -r ta upg1_26
+grep = söker text, -r = rekursivt i katalogen och söker filerna i katalogen nedåt
+ta = delordet jag söker
+upg1_26 = katalogen jag söker ibm
+Övningsuppgift 1.27
+grep oo upg1_27/one upg1_27/two - för att endast söka i angivna filer efter sökord
+Övningsuppgift 1.28
+man grep (man = manual, grep= kommandot du vill läsa om)
+Övningsuppgift 1.29
+man find (man = manual, find = kommandot du vill läsa om)
+Övningsuppgift 1.30
+info bash (öppnar upp detaljerad info om det du söker om)
+Övningsuppgift 1.31
+help cd (help tar fram om inbyggda kommandon som cd)
+Övningsuppgift 1.32
+Svar: tldr cd (exempel) tldr är bara ett hjälpverktyg som man,info,help
+Övningsuppgift 1.33
+Hårda länkar delar samma inode och information inne i filen ändras när man ändrar i
+original filen, förstör man original filen så finns hårda länken kvar. I mjuka länkar
+så förstörs länken mellan original filen > mjuka länken om original filen tas bort.
+Skapar man sen samma "originalfil" med samma ursprungliga namn som mjuka länken pekade
+på så tas länken upp igen, då mjuka länken endast pekar på "söknamnet".
+Övningsuppgift 1.34
+man hamnar på a/b (b) vi står ursprungligen i a/b/c (c) i katalogen c mappen.
+kör sedan cd ./../. första delen stannar på samma plats, andra en nivå upp,
+tredje kommandot samma plats.
+Övningsuppgift 1.35
+Svar: det är en absolut sökväg. Förklaring = /./home/../etc/fstab 
+Börjar från root > stannar på samma nivå > hemkatalog > upp en nivå tillbaka till root 
+> etc > fstab. Man kan alltså skriva denna sökväg oavsett var man står.
+Det som återstår blir bara etc/fstab.
+
+
+

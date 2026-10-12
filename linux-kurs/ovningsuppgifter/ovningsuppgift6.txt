@@ -1,0 +1,72 @@
+Övningsuppgift 6.1
+sudo !! (!! = ersätter föregående kommando)
+Övningsuppgift 6.2
+echo "Allt innehåll" > upg6_2
+Övningsuppgift 6.3
+2>/dev/null - skickar stderr till "svarta hålet" felmeddelanden visas ej
+då får man bara output: processing one,two,four,five eftersom felen
+visas inte. 
+Övningsuppgift 6.4
+echo "Mer innehåll" >> upg6_4 (>> gör en append, > overwrite)
+Övningsuppgift 6.5
+stdin = standard input, nummer 0, vanlig inmatning till kommandon
+stdout = standard output, nummer 1, vanlig lyckad utmatning
+stderr = standard error, nummer 2, felmeddelanden
+Övningsuppgift 6.6
+!#/bin/bash = #! är korrekt hash framför banget för korrekt shebang
+#/usr/sbin/env bash = saknar ! efter # , inget shebang #! = korrekt
+# bash = är en kommentar
+#!bash = pekar inte på någon path, pekar ej var den finns
+Övningsuppgift 6.7
+Testade genom skapa ny fil #!/bin/bash sedan skriver jag helt enkelt
+echo "Hej" | cat
+output: Hej (skickat stdout från vänster kommando till stdin på höger
+kommando)
+Övningsuppgift 6.8
+grep e upg6_8 (tar fram alla e i filen) 
+grep e upg6_8 | tr -d e (skickar stdout från vänster kommando till stdin
+på höger kommando)
+Övningsuppgift 6.9
+cat upg6_9 | sort | head (för att först se hur allt kommer i output)
+sort = sorterar raderna i filen
+head = ger ut ungefär 10 första raderna som output från filen
+cat upg6_9 | sort -n | head (ger dig sortering i numerisk korrekt ordning)
+tips: slå upp man sort i terminalen för att få guidning kring sort
+Övningsuppgift 6.10
+find -iname "*sv_SE*.dic" - för att hitta något som slutar på sv_SE
+får fram sökvägen usr/share/hunspell/sv_SE.dic
+hitta rader som innehåller strängen ord >
+grep ord usr/share/hunspell/sv_SE.dic | head (head ger första rader)
+filtrera in ä > grep ord /usr/share/hunspell/sv_SE.dic | grep ä 
+sortera slumpmässigt: grep ord /usr/share/hunspell/sv_SE.dic | grep ä | grep -r
+slå upp man grep för att hitta --random
+kör sedan >
+grep ord /usr/share/hunspell/sv_SE.dic | grep ä | sort -R | cut -d/ -f1 | head -n 5
+-n ger dig första numrerade linjer istället för 10.
+får 5 slumpade ord utan metadata via (-r och cut) ord som innehåller ä och ord
+lädergjord,bestämningsord,fällbord,jordbävningskatastrof,ordstäv
+Övningsuppgift 6.11
+man bash | tr ' ' $'\n' | sort | uniq -c | sort -nr | tail -n +2 | head -n 5
+pipeline = sort (sorterar) uniq (tar bort upprepande rader) (sort -nr) numerisk/random
+tail (lägger till 2 rader från sista delen av filen) head(tar fram första 5 delen)
+Övningsuppgift 6.14
+grep sko fil.txt | sort | uniq | head -n 10
+Övningsuppgift 6.16
+exit status = avslutningskod från senaste kommando (0=lyckades)
+du kan se exit status för senaste kommando genom: echo $?
+en exit status kan ha 0 om det gick bra eller 1-255 vid misslyckande
+för att se att det gick bra kan du köra >
+grep skol fil.txt && "Sko fanns!" > Sko fanns! printas ut då gick det bra (0)
+Övningsuppgift 6.17
+kör > true > sedan > echo $? > 0 (gick bra)
+Övningsuppgift 6.18
+false > echo $? > 1 (misslyckande, fel)
+Övningsuppgift 6.19
+grep -i Kaskelottval /usr/share/hunspell/sv_SE.dic && echo "Ordet finns i ordboken"
+-i (ignorerar stor/liten bokstav)
+-q (går även lägga till då användar man bara exit status, tystar allt annat)
+Övningsuppgift 6.20
+grep -i Kaskelottval /usr/share/hunspell/sv_SE.dic || echo "Ordet finns inte i ordboken"
+|| = gör nästa om vänster < misslyckades 
+&& = gör nästa om vänster < lyckades 
+Övningsuppgift 6.24
