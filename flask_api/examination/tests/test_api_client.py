@@ -1,3 +1,7 @@
+import pytest
+
+pytestmark = pytest.mark.integration
+
 """
 test_api_client.py
 Testar api_client.py med Marketstack API

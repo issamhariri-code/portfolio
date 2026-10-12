@@ -2,14 +2,23 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-*.ipynb_checkpoints/
-
-# Virtuella miljöer & hemligheter
+.ipynb_checkpoints/
 .venv/
 venv/
+# Lokal konfiguration
 .env
-
-# Editor/OS
+.env.*
+!.env.example
+# Verktyg
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
 .vscode/
-.DS_Store
 *.code-workspace
+.DS_Store
+~$*
+# Genererade quiz; redan spårade exempel behålls.
+/python/projekt/quiz/quiz_questions/*.txt
+/python/projekt/quiz/quiz_answers/*.txt
+/python/ovningar/filovning/quizzes/*.txt

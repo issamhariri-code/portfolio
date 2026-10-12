@@ -1,3 +1,7 @@
+import pytest
+
+pytestmark = pytest.mark.integration
+
 """
 tester för utils.api_handler.get_elpriser
 
@@ -26,7 +30,7 @@ def test_get_elpriser_returns_list():
     """
     data = get_elpriser(2025, 10, 26, "SE3")
 
-    assert type(data) == list 
+    assert type(data) == list
     #Funktionen ska returnera en lista
 
 def test_get_elpriser_item_structure():

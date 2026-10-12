@@ -2,14 +2,18 @@
 BörsLexikon hämtar riktig aktiedata från Marketstack API
 ENKEL KOD FÖR PROGRAMMERING 2: Bara requests, ingen mock, ingen komplexitet
 Fungerar för alla tickers (TSLA, AAPL, MSFT, osv) och alla datum
-API-nyckel hårdkodad för enkelhet (ta bort i produktion)
+API-nyckeln läses från miljövariabeln MARKETSTACK_API_KEY eller en lokal .env-fil.
 """
 
 import datetime
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 import requests  # pip install requests
 
-#API-NYCKEL – från Marketstack
-API_KEY = "REDACTED_API_KEY"
+# Lokal .env ignoreras av Git.
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+API_KEY = os.getenv("MARKETSTACK_API_KEY", "")
 
 
 # Lokala företagsnamn – fallback om API inte ger namn
@@ -58,12 +62,14 @@ def lookup_name(ticker):
 
 """hämtar OHLC-data från Marketstack API"""
 def fetch_from_marketstack(ticker, date):
+    if not API_KEY:
+        return None
     try:
         # Gör datum till sträng för API:et
         date_str = date.strftime("%Y-%m-%d")
         
         # Bygg URL och parametrar (enkelt GET-anrop)
-        url = url = "https://api.marketstack.com/v1/eod"
+        url = "https://api.marketstack.com/v1/eod"
         params = {
             "access_key": API_KEY,
             "symbols": ticker.upper(),

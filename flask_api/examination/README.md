@@ -1,6 +1,31 @@
-#Examinationsuppgift
+# BörsLexikon
+
+Examinationsprojekt i Programmering 2: Flask-app för aktiedata från Marketstack, formulärvalidering och tabellvisning.
+
+## Starta
+Installera miljön enligt [Flask-guiden](../README.md). Kör från `flask_api/examination/`:
+```bash
+cp .env.example .env
+# Fyll i din egen nya MARKETSTACK_API_KEY i .env.
+python -m flask --app application run
+```
+
+Öppna http://127.0.0.1:5000. Startsidan fungerar utan API-nyckel, men aktiedata kräver en nyckel. `.env` ignoreras av Git. Äldre nycklar från projektets tidigare historik ska inte återanvändas.
+
+## Tester
+```bash
+python -m pytest -q
+```
+Tester mot Marketstack med en giltig nyckel:
+```bash
+python -m pytest -q -m integration
+```
+
+## Ursprungliga projektanteckningar
+
+# Examinationsuppgift
 Skapat en README fil för att logga och ha koll på mina uppgifter att göra under examinationsuppgiften.
-##Vad programmet gör
+## Vad programmet gör
 Formulär i webbläsaren:
 År, månad, dag samt nuvarande kurspris
 Användaren skriver in en TICKER eller företagsnamnet exempel:
@@ -13,8 +38,8 @@ Sortera: %-förändring
 Topp 3 vinnare (högst %-förändring)
 Topp 3 förlorare (lägst %-förändring)
 
-##Varje rad i resultatet är ett objekt eller dict med.
-##EXEMPEL
+## Varje rad i resultatet är ett objekt eller dict med.
+## EXEMPEL
 {
   "ticker": "AAPL",
   "name": "Apple Inc.",
@@ -26,7 +51,7 @@ Topp 3 förlorare (lägst %-förändring)
   "pct_change": float  # kan avrundas i visning, ej i beräkning
 }
 
-##Visning av resultat:
+## Visning av resultat:
 Överst: en rad som sammanfattar urvalet:
 “Datum: 2025-10-22 • Perspektiv: Sortera %-förändring  • Antal: 5”
 Tabell med kolumner:
@@ -50,7 +75,7 @@ Helfel: om 0 giltiga rader → visa tydlig text:
 
 
 
-##Kriterier
+## Kriterier
 Resultatvyn ska ge olika perspektiv på data
 
 Jag som användare ska kunna få olika data för olika tickers.
