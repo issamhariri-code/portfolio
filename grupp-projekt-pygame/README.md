@@ -1,125 +1,133 @@
-# MINIL-tech
+# MINIL-tech – Grupprojekt i Pygame
 
-Minil-tech är ett 2D-plattformsspel där spelaren tar sig igenom korta, tydliga banor med gradvis ökande svårighetsgrad.
+Ett 2D-plattformsspel som vi utvecklade som grupparbete med Scrum, Python och
+Pygame. Spelaren styr en karaktär genom olika banor, hoppar mellan plattformar,
+samlar poäng och möter fiender och en boss.
 
-Spelet ska växa steg för steg med nya världar, fiendetyper och rörelseförmåner utan att tappa en enkel och lätt att förstå spelkänsla.
+Min roll i gruppen var att programmera spelkaraktärens funktioner. Här finns
+hela gruppens spel tillsammans med dokumentationen från vårt Scrum-arbete.
 
-Målet är att skapa ett spel som spelare vill återvända till eftersom det alltid finns ett nytt litet steg att ta och en ny utmaning att klara.
+## Mitt arbete med spelkaraktären
 
----
+Jag ansvarade för att konfigurera och programmera karaktären, från val av
+sprite och storlek till hur figuren rör sig och reagerar på spelarens input.
+Det innefattade bland annat:
 
-## Teknisk överblick
+- Rörelse åt vänster och höger med tangentbordet.
+- Hopp, gravitation och stöd för dubbelhopp på senare banor.
+- Att ducka och anpassa kollisionsytan efter rörelsen.
+- Val och skalning av sprites för att stå stilla, gå, hoppa och ducka.
+- Växling mellan gångbilder och att vända figuren efter rörelseriktningen.
+- Kollisioner och landning på plattformar.
 
-- **Språk:** Python 3  
-- **Bibliotek:** Pygame  
-- **Körs som:** Desktop-spel med Pygame-fönster  
-- **Nuvarande MVP:**
-  - Röd spelare (rektangel) som kan röra sig med WASD/piltangenter
-  - Hopp med gravitation och marknivå
-  - Enkel bakgrundsfärg och game loop som kör i 60 FPS
+Spelarlogiken finns i [player.py](game/src/player.py). Där hanteras bland annat
+hastighet, hopp, riktning och vilken bild som ska visas. Tangenttryck för hopp
+kopplas till spelaren från huvudloopen i [main.py](game/src/main.py).
 
----
+Rörelse, sprite och kollisionsyta behövde fungera tillsammans. När figuren
+landade på en plattform skulle det både fungera i koden och se rätt ut på
+skärmen. Det var en viktig del av mitt arbete med karaktären.
 
-## Kom igång
+## Spelets funktioner
 
-### 1. Förutsättningar
+Det här är funktioner i gruppens gemensamma spel:
 
-- Python 3.11(och upåt) installerat
-- Git installerat
+- Tre banor med olika miljöer och plattformar.
+- Karaktär med gånganimationer, hopp, dubbelhopp och möjlighet att ducka.
+- Samlarobjekt, poäng, liv och en hatt som power-up.
+- Fiender och en boss med egna attacker.
+- Huvudmeny, banval, pausmeny och möjlighet att starta om via menyn.
+- Musik, ljudeffekter och separata volyminställningar.
+- Resultat och high score som sparas lokalt i [game/data/scores.json](game/data/scores.json).
 
-### 2. Klona repo och gå till mappen
+## Testa spelet
 
-```bash
-git clone <REPO-URL>
-cd pr-projektuppgift-d5-minil-tech
+Spelet körs lokalt i ett Pygame-fönster. Du behöver Git, Python 3.11 eller
+senare och en miljö som kan visa grafiska fönster och spela ljud.
+Pythonberoendet är `pygame==2.6.1` och finns i [requirements.txt](requirements.txt).
+
+### Windows – PowerShell
+
+Klona portfolion och gå till projektmappen:
+
+```powershell
+git clone https://github.com/issamhariri-code/portfolio.git
+cd portfolio/grupp-projekt-pygame
 ```
 
-## 3.Skapa och aktivera virtuell miljö
+Skapa en egen virtuell miljö och installera beroendet:
 
-Windows PowerShell:
-
-```bash
-python -m venv venv
-.\venv\Scripts\Activate.ps1
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Mac/Linux:
+Starta spelet:
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-``` 
-
-### 4. Installera beroenden
-
-```bash
-pip install -r requirements.txt
-``` 
-
-### 5. Starta spelet
-
-```bash
+```powershell
 cd game/src
-python main.py
-```
-Spelet öppnas i ett grönt fönster med en röd spelare som du kan styra med piltangenterna eller WASD och hoppa med `space`.
-
----
-
-## Projektstruktur
-
+..\..\.venv\Scripts\python.exe main.py
 ```
 
-├─ game/
-│  ├─ src/
-│  │  ├─ main.py        # Startpunkt, initierar Pygame och kör game loop
-│  │  ├─ player.py      # Spelarlogik: rörelse, hopp, gravitation
-│  │  ├─ function.py    # (förberedd för framtida hjälpfunktioner)
-│  │  ├─ config.py      # (förberedd för framtida konstanter/inställningar)
-│  │  └─ tests/         # Tester för spelets moduler
-│  ├─ assets/
-│  │  ├─ sprites/       # Grafiska resurser (spelare, fiender, objekt)
-│  │  ├─ tilesets/      # Tiles till banor
-│  │  ├─ maps/          # Kartor/banor
-│  │  └─ sounds/        # Musik och ljudeffekter
-│  └─ data/
-│     └─ levels/        # Ban-data
-├─ scrum/               # Scrum-dokumentation och projektstyrning
-│  ├─ product_vision.md # Produktvision
-│  ├─ product_backlog.md# User stories / produktbacklogg
-│  ├─ sprint_backlog.md # Sprint 1–4, tekniska tasks
-│  ├─ daily-standups/   # Loggar för daily standups
-│  └─ tech_overview.md  # Tekniskt diagram och arkitekturbeskrivning
-├─ docs/                # Övrig dokumentation (t.ex. PR-guide)
-├─ requirements.txt     # Pythonberoenden (bl.a. pygame)
-└─ README.md            # Den här filen
+### Linux och macOS
 
+```bash
+git clone https://github.com/issamhariri-code/portfolio.git
+cd portfolio/grupp-projekt-pygame
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+cd game/src
+../../.venv/bin/python main.py
 ```
 
----
+Om repot redan är klonat börjar du i din befintliga mapp
+`portfolio/grupp-projekt-pygame` och skapar miljön där.
+Kommandona använder miljöns Python direkt, så den behöver inte aktiveras separat.
 
-## Scrum & arbetssätt
+När fönstret öppnas kan du starta spelet eller välja bana från menyn.
+Fönstret är inställt på 1920 × 1080. Vid körning genom WSL behövs stöd för
+grafiska program och ljud, exempelvis WSLg.
 
-Projektet följer Scrum enligt kursens riktlinjer:
-- Produktvision: `scrum/product_vision.md`
-- Produktbacklogg: `scrum/product_backlog.md`
-- Sprint Backlog: `scrum/sprint_backlog.md`
-- Daily Standups: Markdown + skärmdump i `scrum/daily-standups/`
-- Teknisk översikt: `scrum/tech_overview.md`
+### Kontroller
 
----
+| Funktion | Tangent |
+| --- | --- |
+| Gå åt vänster | A eller vänsterpil |
+| Gå åt höger | D eller högerpil |
+| Hoppa | Mellanslag, W eller uppåtpil |
+| Dubbelhoppa när banan tillåter det | Tryck hopptangenten igen i luften |
+| Ducka | S eller nedåtpil |
+| Pausa eller återuppta | Esc |
+| Använd menyerna | Mus |
 
-## Git & Pull Request
+Börja gärna med att gå, hoppa och ducka för att testa karaktärens rörelser.
+På senare banor finns dubbelhopp, fler fiender och bossen.
 
-- All utveckling sker i feature-brancher från `main`.
-- Branch-namn:
-    - `feat/...` för nya funktioner i spelet
-    - `fix/...` för buggar
-    - `docs/...` för dokumentation
-- Commit meddelanden följer Conventional Commits:
-    - `feat: lägg till ny fiendetyp`
-    - `fix: åtgärda krasch vid hopp`
-    - `docs: lägg till installationsinstruktioner i README`
-- Alla ändringar går via Pull Request:
-    - Minst två godkännanden krävs innan merge.
-    - `main` är skyddad från direkta pushar.
+## Scrum och samarbete
+
+Arbetet delades upp i gruppen med backlogg, sprintuppgifter och daily standups.
+Mitt fokus var spelkaraktären och hur den fungerade ihop med banorna och
+övriga delar av spelet.
+
+Dokumentationen finns kvar här:
+
+- [Produktvision](scrum/product_vision.md)
+- [Produktbacklogg](scrum/product_backlog.md)
+- [Sprintbacklogg](sprint_backlog.md)
+- [Daily standups](scrum/daily-standups/)
+- [Teknisk översikt](scrum/tech_overview.md)
+
+## Hitta i projektet
+
+```text
+grupp-projekt-pygame/
+├── game/
+│   ├── src/           # Spelkod, bland annat main.py och player.py
+│   ├── assets/        # Sprites, bakgrunder, plattformar och ljud
+│   └── data/          # Sparade resultat och mapp för ban-data
+├── scrum/             # Planering och dokumentation från grupparbetet
+├── docs/              # Bland annat guide för pull requests
+├── sprint_backlog.md
+├── requirements.txt
+└── README.md
+```
